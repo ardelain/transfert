@@ -1,0 +1,11 @@
+----
+=Assembleur:
+
+
+==compiler:
+	nasm -f elf nom.asm
+	lf - m elf.i386 -o nom.elf nom.o
+
+
+==les pointeurs -> acces : [nomVariable]
+----

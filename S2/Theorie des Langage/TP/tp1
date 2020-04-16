@@ -1,0 +1,11 @@
+TP Langage :
+
+exemple :
+block 
+    : (statement | function)* (Return expression ';')? 
+    ; 
+
+Cette avertissement indique que le block en question ('()*') est gourmand. Il va essayer de faire correspondes un  maximal d'occurences statement ou functionDec1
+le changer en ()*? permet de faire correpondre a un minimal d'occurance ( fin expression quand function est rencontré)
+
+

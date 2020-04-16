@@ -1,0 +1,4 @@
+TPs AlgorithmiqueL3 UCA Groupe A 04/2019
+Fatima-Ezzohra AKHTEN et Arthur DELAIN. 
+fait sous intel ij
+les jar correspondent au deux TP (affichage graphique), les projets sinon s'execute avec leur main et en integrant la/les librairie(s) placée(s) dans lib

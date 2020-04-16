@@ -1,0 +1,65 @@
+
+Rendez-vous sur la page web https://terrier.users.greyc.fr/LangCompil/ (vous y trouverez les différents CM sur la compilation, ainsi que les fiches de TP). 
+
+Votre ami pour la documentation de ANTLR :  https://github.com/antlr/antlr4/blob/master/doc/index.md
+
+
+
+Séance 1:
+   -> Prise en main de ANTLR : 1h30 pour faire jusqu'à la partie  qui gère les commentaires.
+   -> Analyse syntaxique avec ANTLR : la deuxième partie de la séance.
+
+Séances 2 et 3 : Calculette en MVaP
+    -> Vous ferez B,C,E,F,G,H,I
+
+
+3 notes de TP  (les TPs peuvent être faits en binôme):
+Chaque séance de TP sera notée la fois prochaine (on passera voir le travail réalisé et on donnera une note suivant vos réponses aux questions et les résultats des tests).  Concrètement, 
+
+  -> Séance 2 : on vérifie le travail fait sur l'analyse syntaxique
+  -> Séance 3 : on vérifie le travail fait sur les parties B,C,E
+ -> On organisera une séance dans nos bureaux pour corriger le travail du TP noté 3 (de la même manière que les autres séances).
+
+
+POUR GERER DES VARIABLES GLOBALES, il faut utiliser une table des symboles, je vous propose d'utiliser le type HashMap (voir exemple ci-dessous).  Cette table des symboles sera utilisée pour stocker les paires du genre (var-globale, valeur) ou (var-globale,adresse) ou (identifiant, type) suivant ce dont vous avez besoin (vous pouvez bien entendu en déclarer plusieurs selon vos besoins ou l’encapsuler dans des classes). 
+
+@parser::members {
+// pour avoir une table des symboles, vous pouvez la modifier pour avoir le comportement voulu
+ HashMap<String, int> tablesSymboles = new HashMap<String, int>();
+}
+
+
+
+
+A LIRE SEULEMENT LORSQUE VOUS EN ETES A LA QUESTION D, SINON INCOMPREHENSIBLE
+
+
+Pour la Question D du TP sur la calculette, vous pourrez vous inspirer de ce qui suit (compatible avec la proposition de tablesSymboles ci-dessus, vous devrez l'adapter selon vos choix sur la table des symboles):
+
+
+
+
+// pour gérer les E/S
+
+io returns [ String code ] 
+    : READ '(' IDENTIFIANT ')'
+        {   
+            int  at = tablesSymboles.get($IDENTIFIANT.text);
+            $code="  READ" ;
+                $code+="\n"; // new line after READ 
+		            $code+="  STORE" + (at < 0 ? "L" : "G") +" " + at + "\n"; 
+        }
+    |  WRITE '(' expression ')'
+        {
+            $code = $expression.code 
+		+ "  WRITE" + "\n" 
+		+ "  POP" +  "\n";
+        }
+    ;
+
+
+
+
+
+
+

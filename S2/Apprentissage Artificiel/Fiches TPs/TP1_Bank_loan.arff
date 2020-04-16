@@ -1,0 +1,21 @@
+@RELATION Loan
+
+@ATTRIBUTE id NUMERIC
+@ATTRIBUTE unemployed {y,n}
+@ATTRIBUTE buy_computer {y,n}
+@ATTRIBUTE buy_car {y,n}
+@ATTRIBUTE sex {m,f}
+@ATTRIBUTE not_married {y,n}
+@ATTRIBUTE area {good,bad}
+@ATTRIBUTE age NUMERIC 
+@ATTRIBUTE money_x10000_yen NUMERIC 
+@ATTRIBUTE monthly_pay_x10000_yen NUMERIC
+@ATTRIBUTE months_for_loan NUMERIC
+@ATTRIBUTE years_with_last_employer NUMERIC
+@ATTRIBUTE class {approaved,rejected}
+@DATA
+1,n,y,n,f,y,good,18,20,2,15,1,approaved
+2,n,y,n,f,y,good,20,10,2,20,2,approaved
+3,y,y,n,f,n,bad,25,5,4,12,0,rejected
+4,n,y,n,f,n,good,40,5,7,12,2,approaved
+5,n,y,n,f,y,bad,50,5,4,12,25,approaved

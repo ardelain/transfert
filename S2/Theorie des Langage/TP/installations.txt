@@ -1,0 +1,48 @@
+INSTRUCTIONS Pour l'INSTALLATION de ANTLR
+
+- créer un répertoire bin dans votre répertoire home
+- y copier le .jar antlr-4.7.2-complete.jar
+- dans votre .bashrc (ou .profile : le script qui est lancé au lancement du terminal) ajouter les lignes suivantes :
+
+export CLASSPATH=.:~/bin/antlr-4.7.2-complete.jar:~/bin/MVaP.jar:$CLASSPATH
+
+alias antlr4='java -Xmx500M -cp "~/bin/antlr-4.7.2-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
+alias grun='java -Xmx500M -cp "~/bin/antlr-4.7.2-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
+
+
+
+INSTRUCTIONS Pour l'INSTALLATION de MVaP
+
+- téléchargez les sources-MVaP-2.1.zip et vous le dézippez
+
+- se placer dans le répertoire sources-MVaP-2.1 et lancer les commandes suivantes (je suppose que le prompt du shell c'est $):
+  $ antlr4 MVaP.g4
+  $ javac MVaP*.java
+
+Modifier le fichier META-INF/MANIFEST.MF pour mettre le répertoire où se trouve antlr4 et ensuite exécuter la commande suivante.
+
+  $ jar cfm MVaP.jar META-INF/MANIFEST.MF *.class
+
+
+
+UTILISATIONS d'ANTLR (la plus basique)
+
+$ antlr4 Fic.g4
+$ javac Fic*.java
+
+On exécute ensuite le fichier contenant le main (après l'avoir compilé bien entendu). 
+
+
+UTILISATIONS de MVaP :
+
+- pour assembler un code source  C.mvap
+
+$ java -cp MVaP.jar C.mvap
+
+(il va créer un fichier C.mvap.cbap)
+
+- pour l'exécuter
+
+$ java -jar MVaP.jar C.mvap.cbap
+
+(ou java -jar MVaP.jar -d C.mvap.cbap si on veut une trace des calculs)

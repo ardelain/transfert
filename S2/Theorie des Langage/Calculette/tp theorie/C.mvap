@@ -1,0 +1,9 @@
+PUSHI1
+PUSHI2
+ADD
+
+PUSHI3
+ADD
+POP 
+  HALT  
+

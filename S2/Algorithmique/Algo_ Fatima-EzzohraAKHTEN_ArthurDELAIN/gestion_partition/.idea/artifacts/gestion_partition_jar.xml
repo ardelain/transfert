@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="gestion_partition:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/gestion_partition_jar</output-path>
+    <root id="archive" name="gestion_partition.jar">
+      <element id="module-output" name="gestion_partition" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jfreechart-1.5.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/blazegraph/junit-ext/2.1.4/junit-ext-2.1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/log4j/log4j/1.2.17/log4j-1.2.17.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

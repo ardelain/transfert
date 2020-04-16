@@ -1,0 +1,240 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2019.3.27)  3 APR 2019 12:38
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**fiche_kaggle_panda.tex
+(./fiche_kaggle_panda.tex
+LaTeX2e <2014/05/01>
+Babel <3.9l> and hyphenation patterns for 79 languages loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen103
+\extrarowheight=\dimen104
+\NC@list=\toks14
+\extratabsurround=\skip43
+\backup@length=\skip44
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2014/10/28 v2.10 `tabularx' package (DPC)
+\TX@col@width=\dimen105
+\TX@old@table=\dimen106
+\TX@old@col=\dimen107
+\TX@target=\dimen108
+\TX@delta=\dimen109
+\TX@cols=\count87
+\TX@ftn=\toks15
+)
+\demilargeur=\dimen110
+
+(./fiche_kaggle_panda.aux)
+\openout1 = `fiche_kaggle_panda.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 12.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 12.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 12.
+
+
+LaTeX Warning: No \author given.
+
+Missing character: There is no Ã in font cmbx12!
+Missing character: There is no © in font cmbx12!
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 20.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 20.
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--26
+
+ []
+
+
+Overfull \hbox (124.35129pt too wide) in paragraph at lines 16--26
+\OML/cmm/m/it/10 donnees[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 pd:Series\OT1/cmr
+/m/n/10 (["\OML/cmm/m/it/10 donnee\OT1/cmr/m/n/10 1"\OML/cmm/m/it/10 ; \OT1/cmr
+/m/n/10 "\OML/cmm/m/it/10 donnee\OT1/cmr/m/n/10 2"\OML/cmm/m/it/10 ; \OT1/cmr/m
+/n/10 "\OML/cmm/m/it/10 donnee\OT1/cmr/m/n/10 1"]\OML/cmm/m/it/10 ; index \OT1/
+cmr/m/n/10 = ["\OML/cmm/m/it/10 index\OT1/cmr/m/n/10 1"\OML/cmm/m/it/10 ; \OT1/
+cmr/m/n/10 "\OML/cmm/m/it/10 index\OT1/cmr/m/n/10 2"\OML/cmm/m/it/10 ; \OT1/cmr
+/m/n/10 "\OML/cmm/m/it/10 index\OT1/cmr/m/n/10 3"]\OML/cmm/m/it/10 ; name \OT1/
+cmr/m/n/10 =
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--34
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--34
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
+[]|\OT1/cmr/m/n/10 .rename(columns=
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
+\OMS/cmsy/m/n/10 f[]\OML/cmm/m/it/10 nom[]olumn[] \OT1/cmr/m/n/10 :[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
+[]|\OT1/cmr/m/n/10 changer le nom des
+ []
+
+
+Overfull \hbox (34.15187pt too wide) in paragraph at lines 37--50
+[] 
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 2343) in paragraph at lines 56--56
+[]|\OT1/cmr/m/n/10 nombre de ligne et de
+ []
+
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no © in font cmr10!
+
+Underfull \hbox (badness 1057) in paragraph at lines 58--58
+[]|\OT1/cmr/m/n/10 information gen-erale sur
+ []
+
+
+Underfull \hbox (badness 5817) in paragraph at lines 58--58
+\OT1/cmr/m/n/10 donne : bool, int64,
+ []
+
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no © in font cmr10!
+
+Underfull \hbox (badness 5592) in paragraph at lines 59--60
+[]|\OT1/cmr/m/n/10 multiple info : nom-
+ []
+
+
+Underfull \hbox (badness 3895) in paragraph at lines 59--60
+\OT1/cmr/m/n/10 type, etendue, mdi-ane,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/m/n/10 .describe(include= ['ob-
+ []
+
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no © in font cmr10!
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no © in font cmr10!
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no ª in font cmr10!
+
+Overfull \hbox (34.15187pt too wide) in paragraph at lines 51--65
+[] 
+ []
+
+
+Overfull \hbox (0.56168pt too wide) in paragraph at lines 69--89
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--89
+
+ []
+
+[2]
+Overfull \hbox (34.15187pt too wide) in paragraph at lines 92--106
+[] 
+ []
+
+
+Overfull \hbox (34.15187pt too wide) in paragraph at lines 108--129
+[] 
+ []
+
+
+Overfull \hbox (34.15187pt too wide) in paragraph at lines 133--141
+ [] 
+ []
+
+[3]
+Overfull \hbox (34.15187pt too wide) in paragraph at lines 146--154
+ [] 
+ []
+
+[4] (./fiche_kaggle_panda.aux) ) 
+Here is how much of TeX's memory you used:
+ 335 strings out of 493105
+ 3859 string characters out of 6137072
+ 62216 words of memory out of 5000000
+ 3867 multiletter control sequences out of 15000+600000
+ 8362 words of font info for 30 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 23i,10n,17p,223b,182s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on fiche_kaggle_panda.pdf (4 pages, 103460 bytes).
+PDF statistics:
+ 53 PDF objects out of 1000 (max. 8388607)
+ 37 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
