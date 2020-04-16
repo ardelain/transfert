@@ -1,0 +1,93 @@
+Thomas Garcia-Rey:
+
+TP3:
+
+========================================1.3:
+Question 2: On accède à la console du switch.
+
+Question 3: On accède à la même fenêtre.
+
+Question 4: Les paramètres de liaison PC vers switch sont les bits par seconde, les data bits, la parité, stop bits et flow control.
+
+Question 5: On ne peut plus accéder au terminal switch à partir du PC3, il faut changer les paramètres de vitesse du PC3 de 9600 à 2400 pour retrouver le fonctionnement normal.
+
+Question 6: Non, le PC3 agit comme un écran pour le switch, il ne sert qu'à administrer le switch.
+
+========================================1.4:
+Question 7: Le fichier est "pt3000-i6q4l2-mz.121-22.EA4.bin".
+Le nom de l'ios est PT3000-i6q4l2-mz et sa version est 12.1(22)EA4.
+
+Question 8: Et bien le fichier a été supprimé...
+
+Question 9: Il est impossible de relancer le switch: "Boot process failed". Il faut réinstaller l'OS.
+
+========================================1.5:
+Question 10:Ce n'est pas show running-configuration mais show running-config.
+
+Contenu:
+
+Building configuration...
+
+Current configuration : 460 bytes
+!
+version 12.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Switch
+!
+!
+!
+spanning-tree mode pvst
+!
+interface FastEthernet0/1
+!
+interface FastEthernet1/1
+!
+interface FastEthernet2/1
+!
+interface FastEthernet3/1
+!
+interface FastEthernet4/1
+!
+interface FastEthernet5/1
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+!
+!
+!
+line con 0
+!
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+!
+end
+
+
+Le nom a bien été changé...
+
+Question 11: La configuration a été perdue.
+
+Question 12: La configuration a été conservée. Identique sauf que le hostname a bien été changé dans la nvram.
+
+
+========================================1.5.1:
+Question 13:Non elles n'ont pas à être complètes, par exemble la commande "configure" marche avec "config" et "conf".
+
+Question 14: Le prompt permet de savoir sur quel niveau on se situe (>; #;)
+
+
+========================================2:
+Question 15: Les users de différents switchs peuvent communiquer entre eux.
+
+Question 16: USER1 et USER2 ne peuvent plus communiquer entre eux. 
+
+Question 17: Les trames ont un preamble, une adresse destination, une adresse source, un type, la data et la FCS. Quand le message passe par un switch, la case sfd apparaît dans le preamble du outbound ou de l'inbound.

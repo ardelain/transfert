@@ -1,0 +1,41 @@
+Bauwens Philippe
+
+Exercice 1:
+J'ai utilisé les adresses suivantes : 192.168.0.____
+
+Exercice 2:
+Le paquet est transmis au switch puis envoyé aux autres machines qui répondent. Une fois les réponses reçut le switch les transfère a l'emmeteur.
+
+
+
+(2)
+J'accède au terminal du switch.
+(3)
+Il semblerait que ça soit la même.
+(4)
+Nous avons comme paramètre le nombre de bits par seconde, les data bits, la parité, le bit de stop et le contrôle de flow.	
+(5)
+Nous ne pouvons plus accéder a la console du switch via PC3 si nous ne définissons pas la vitesse de transfère à 2400 bit/s dans ces paramètres.
+(6)
+non car le débit est bridé afin de n'utilisé cette liaison que pour configurer le switch.
+(7)
+la mémoire flash est dans le fichier suivant : c2960-lanbase-mz.122-25.FX.bin
+et la version de l'OS est v12.2
+(8)
+flash supprimé
+(9)
+et bien la machine reboot et indique qu'il lui faut une image.
+Dans le cas ou ce ne serait pas une simulation, je pense qu'il faudra réinstaller une image pour reboot le switch.
+(10)
+le fichier de configuration courrante est vide.
+(11)
+la configuration n'a point survécut au redémarage du switch
+(12)
+Je constate que suite au redémarage la configuration a persisté, et le fichier startup-config est toujours présent dans la ram.
+(13)
+ - non, elle se complète autamiquement (au niveau du nom de la commande, ex : en -> enable) si ce n'est pas ambïgue avec une autre commande.
+ - En revanche certaine commande ont besoin de plus d'information pour s'excuter comme "copy"
+(14)
+On peut voir son niveau à l'aide de ce qui se trouve à gauche de l'entré de commande, ici : sw01#
+(15)
+ne fonctionne pas

@@ -1,0 +1,104 @@
+TP2 XPATH
+
+Exercice 1:
+
+1) xmllint --xpath "/Contacts" contacts.xml : retourne la liste des contactes contenant deux personnes et leurs informations(racine du document avec les enfants par default) 
+
+2) xmllint --xpath "/Contacts/Person" contacts.xml : retourne toutes les personnes de <Contacts>
+
+3) xmllint --xpath "//Person[Firstname="John"]" contacts.xml : retourne le noeud courant et ses descendants s'appellant John 
+
+4) xmllint --xpath "//Person[Email]" contacts.xml : retourne toutes les personnes ayant un email dans le noeud courant
+
+5) xmllint --xpath "/Contacts/Person[1]/Firstname/child::text()" contacts.xml : renvoie le prénom (text) de la première personne de la liste de contact
+
+6) xmllint --xpath "/Contacts/Person[1]/Firstname/text()" contacts.xml : renvoie le prénom (texte) de la première personne de la liste de contact, child n'étant pas nécessaire, la requête 5 et 6 sont identiques.
+
+7) xmllint --xpath "/Contacts//Address[@type="home"]//Street/child::text()" contacts.xml : retourne toutes les rues (texte) d'addresse de type "home".
+
+8) xmllint --xpath "/Contacts//Address[@type="home" and City="London"]" contacts.xml : retourne tous les noeuds adresses de type "home" et leurs fils et possédant dans City le texte "London"
+
+9) xmllint --xpath "/Contacts//Address[@type='work' and City='Dublin']/parent::node()/Lastname/text()" contacts.xml : retourne le nom des personnes possédant une adresse de type "work" à "Dublin"
+
+10) xmllint --xpath "/Contacts//Address[@type='work' and City='Dublin']/../Lastname/text()" contacts.xml : retourne le nom des personnes possédant une adresse de type "work" à "Dublin" car /.. est équivalent à /parent::node()
+
+11) xmllint --xpath "/Contacts[.//Address[@type='work' and City='Dublin']]//Lastname/text()" contacts.xml : retourne le nom de tous les descendants de <Contacts> si au moins une personne possède une adresse de type "work" à "Dublin"
+
+12) xmllint --xpath "/Contacts//Address[@type='work']/ancestor::node()" contacts.xml : retourne les noeuds ancêtres d' <Adresse> de type "work"  (Contact, Person, et le fichier(première balise))
+
+13)  xmllint --xpath "/Contacts/Person[Lastname='Smith']/following-sibling::node()/Lastname/text()" contacts.xml : retourne les noms(texte) des noeuds frères suivants à celui ayant pour nom "Smith" donc : les noms des personnes suivantes
+
+14) xmllint --xpath "/Contacts/Person[following-sibling::node()/Lastname='Dunne']/Lastname/text()" contacts.xml : retourne les noms(texte) des noeuds frères précédants à celui ayant pour nom "Smith" donc : les noms des personnes précédantes
+
+Exercice 2 :
+
+1. xmllint --xpath "//composition" cd.xml
+
+2. xmllint --xpath "//performance[soloist]/composition" cd.xml
+
+3. xmllint --xpath "//performance[not(soloist)][orchestra]" cd.xml
+
+4. xmllint --xpath "//CD[publisher='Deutsche Grammophon']/performance[orchestra='London Symphony Orchestra']/soloist" cd.xml
+
+5.xmllint --xpath "/CDlist//CD[performance[orchestra='London Symphony Orchestra']]" cd.xml
+
+
+Exercice 3 :
+
+1. xmllint --xpath "/booker/award[5]/title/text()" booker.xml
+
+2. xmllint --xpath "/booker/award[6]/author/text()" booker.xml
+
+3. xmllint --xpath "/booker/award[year='2000']/title/text()" booker.xml
+
+4.  xmllint --xpath "/booker/award[title='Possession']/author/text()" booker.xml
+
+5.xmllint --xpath "/booker/award[author='J M Coetzee']/title/text()" booker.xml
+
+6.xmllint --xpath "/booker/award[year>='1995']/author/text()" booker.xml
+
+7.xmllint --xpath "count(/booker/award)" booker.xml
+
+Partie 2:
+
+Exercice 1:
+
+1. recettes1.xml : xmllint --xpath "/cuisine/recette/titre/text()"  recettes1.xml
+recettes2.xml : xmllint --xpath "/cuisine/recette/titre/text()"  recettes2.xml
+
+2. recettes1.xml : xmllint --xpath "/cuisine/recette/ingredients/ingredient/nom_ing/text()"  recettes1.xml
+recettes2.xml : xmllint --xpath "/cuisine/ingredient/text()"  recettes2.xml
+
+3. recettes1.xml : xmllint --xpath "/cuisine/recette[2]/titre"  recettes1.xml
+recettes2.xml : xmllint --xpath "/cuisine/recette[2]/titre"  recettes2.xml
+
+4. recettes1.xml : xmllint --xpath "/cuisine/recette/texte/etape[last()]"  recettes1.xml
+recettes2.xml : xmllint --xpath "/cuisine/recette/texte/etape[last()]"  recettes2.xml
+
+5. recettes1.xml : xmllint --xpath "count(/cuisine/recette)"  recettes1.xml
+recettes2.xml : xmllint --xpath "count(/cuisine/recette)"  recettes2.xml
+
+6. recettes1.xml : xmllint --xpath "cuisine/recette[count(ingredients/ingredient)<7]" recettes1.xml
+recettes2.xml : xmllint --xpath "cuisine/recette[count(ingredients/ing-recette)<7]" recettes2.xml
+
+7. recettes1.xml : xmllint --xpath "cuisine/recette[count(ingredients/ingredient)<7]/titre/text()" recettes1.xml
+recettes2.xml : xmllint --xpath "cuisine/recette[count(ingredients/ing-recette)<7]/titre/text()" recettes2.xml
+
+8. recettes1.xml : xmllint --xpath "cuisine/recette[ingredients/ingredient/nom_ing='farine']" recettes1.xml
+recettes2.xml : xmllint --xpath "cuisine/recette[ingredients/ing-recette[@ingredient='farine']]" recettes2.xml
+
+9. recettes1.xml : xmllint --xpath "cuisine/recette[categorie='Entrée']" recettes1.xml
+recettes2.xml : xmllint --xpath "cuisine/recette[contains(@categ, 'entree')]" recettes2.xml
+
+Exercice 2 :
+
+1.  xmllint --xpath "count(//dict[key='Tracks']/dict/key)" iTunes-Music-Library.xml
+
+2. xmllint --xpath "//key[.='Album']/following-sibling::string[1]" iTunes-Music-Library.xml
+
+3.xmllint --xpath "//key[.='Genre']/following-sibling::string[1]" iTunes-Music-Library.xml
+
+4.xmllint --xpath "count(//key[.='Genre']/following-sibling::string[1][.='Jazz'])" iTunes-Music-Library.xml
+
+5.xmllint --xpath "//key[.='Genre']/following-sibling::string[1][not(text()=following::text())]"  iTunes-Music-Library.xml
+

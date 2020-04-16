@@ -1,0 +1,108 @@
+TP5 Arthur Delain 
+1)
+Question 1:
+adresse IP : 192.168.102.29
+adresse Mac : d8:9e:f3:02:dd:87
+adresse IP de la passerelle : 192.168.102.254
+adresse IP du serveur DNS : 193.55.95.1
+Oui. Notre machine a interrogé le DNS afin de connaitre l'adresse ip de destination (l'adresse de google(172.217.18.46))
+
+Question 2:
+Paquet ICMP émis par notre machine (request) et Paquet ICMP réponse de la destination (reply)
+
+Question 3:
+Dans l'onglet : Ethernet II, Src: d8:9e:f3:02:dd:87 (d8:9e:f3:02:dd:87), Dst: IETF-VRRP-VRID_03 (00:00:5e:00:01:03)
+
+Question 4:
+commande arp : 
+[...]
+gateway                  ether   00:00:5e:00:01:03   C                     enp0s31f6
+[...]
+->correspond à la destination
+
+Question 5:
+Le champ type est codé sur 2 octets et indique le type de protocole inséré dans le champ donnée. 
+
+Question 6:
+Type:type de l'ip IP (0x0800) -> IPv4
+Type: type de requete 8 (Echo (ping) request) (requete d'echo)
+
+Question 7:
+Source: 192.168.102.29 (192.168.102.29) ->notre machine
+Destination: 172.217.18.46 (172.217.18.46) ->google
+
+Question 8:
+Non cela ne correspond pas (!= de 192.168.102.254))
+Question 9:
+Il sert a indiquer le protocol
+
+Question 10:
+Protocol = ICMP (1)
+
+2)
+Question 11:
+
+en 1er ARP
+Sender IP address: 192.168.102.29 (192.168.102.29)
+Target IP address: 192.168.102.30 (192.168.102.30)
+
+Sender IP address: 192.168.102.30 (192.168.102.30)
+Target IP address: 192.168.102.29 (192.168.102.29)
+
+en 2eme ICMP
+(request)
+Source: 192.168.102.29 (192.168.102.29)
+Destination: 192.168.102.30 (192.168.102.30)
+
+(reply)
+Source: 192.168.102.30 (192.168.102.30)
+Destination: 192.168.102.29 (192.168.102.29)
+
+
+Question 12:
+arp -a 
+? (192.168.102.28) at d8:9e:f3:02:dd:98 [ether] on enp0s31f6
+? (192.168.102.10) at d8:9e:f3:02:dc:57 [ether] on enp0s31f6
+gateway (192.168.102.254) at 00:00:5e:00:01:03 [ether] on enp0s31f6
+? (192.168.102.30) at d8:9e:f3:02:dd:97 [ether] on enp0s31f6
+cloneomat (192.168.102.252) at fa:16:3e:97:73:08 [ether] on enp0s31f6
+
+(ajout des nouvelle adresse de destination)
+
+3)
+
+Question 13:
+DHCP est l'acronyme de Dynamic Host Configuration Protocol
+
+Question 14:
+adresse serveur DHCP :  DHCP Server Identifier: 192.168.100.74 (192.168.100.74)
+
+Question 15:
+en 1er : query au DNS (request - reply)
+2eme requete DHCP ( Discover - Offer - Request - ACK)
+
+Question 16:
+DNS : Domain name sytem
+
+Question 17:
+adresse IP du serveur DNS : 193.55.95.1
+
+Question 18:
+Name: ucaweb02.uca.fr
+
+Question 19:
+Type: A (Host address) (relie nom hote a adresse ip  d'un serveur)
+
+Question 20:
+443
+
+Question 21:
+il existe TLSv1.2
+
+Question 22:
+SSL : Secuere Socket Layer
+TLS : Transport Layer Security
+
+Question 23:
+TLS est une norme de sécurisation par chiffrement du transport de l'information ( dans les réseaux informatiques)
+

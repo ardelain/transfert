@@ -1,0 +1,62 @@
+TP1 Reseaux :
+
+Question 0:
+Le modèlle OSI (Open Systems Interconnection) est le suivant:
+
+
+7)couche application :
+6)couche présentation 
+5)couche session 
+4)couche transport : chargé du transport des données de bout en bout
+3)couche reseaux :permet de gérer les adresses et le routage des données
+2)couche liaison/données :  définit l'interface avec la carte réseau
+1)couche physique : façon de laquelle les données sont converties en signaux numérique
+
+Question 1:
+http/https : hypertext transfer protocol : protocol de communication client serveur
+pop3 : post office protocole :permet de récupérer les courriers électroniques situés sur un serveur de messagerie électronique
+imap : Interactive Message Access Protocol : pareil que pop3
+smtp : simple mail transfer protocol : protocol permettant de transferer des courrier électronique
+bootp : Boostrap Protocol: permet a une machine sans disque dur de connaitre son ip, l'adresse d'un hote (serveur) et le nom d'un fichier à charger en memoire
+ppp : point-to-point protocol : permet une connection entre deux hote (sur la couche 2)
+mac : Media Access Control: identifiant physique d'une machine (de leur carte réseaux)
+
+Question 2:
+couche 7 : http/https, SMTP, IMAP
+couche 3: Boostp, pop3
+couche2: PPP
+couche 1: mac
+
+Question 3: Chaque protocole est encapsulé dans une couche de protocole de plus en plus bas niveau, c'est inclure les données d'un protocole dans un autre. [...]
+
+Question 5:
+http : 80 / https 443
+pop3 : 110
+imap : 143
+smtp : 25
+bootp : 67,68,69
+ppp :
+mac : 
+
+Question 6:
+host permet de rechercher un nom d'hote et d'avoir son adresse ip (ainsi que différentes informations)
+
+Question 7:
+ping permet de communiquer avec un hote (verification adresse) et de savoir si il peut repondre
+-c nombre, est une option permettant de controller le nombre de packet emis vers l'hote (le nombre de packet envoyé sera celui indiqué) 
+-t nombre, correspond à un type d'information a rechercher
+	- x = 4
+
+Question 8: On obtien le même resultat, arret à la 4eme iteration
+
+Question 9:
+
+• netstat -tp : affiche processus/programme de type tcp sur la machine
+• netstat -ltp : affiche processus/programme de type tcp et dans état LISTEN (d'écoute) sur la machine
+• nestat -up  : affiche processus/programme de type udp sur la machine
+• netstat -i : serie de statistique sur les différentes interfaces réseau
+• netstat -r : donne les routes de la machine
+
+Question 10:
+
+ifconfig : description des interfaces accessibles par la machine en indiquant différentes caractéristiques (ip, mask, mac, interaction(loopback, broadcast, multicast)...)

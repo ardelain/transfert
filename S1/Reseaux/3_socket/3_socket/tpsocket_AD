@@ -1,0 +1,35 @@
+TP 5 Arthur Delain
+
+Exercice 1:
+printf : section 1 et 3 (man 1 & 2)
+pwd : section 1 (man 1)
+read : section 1, 2 et 3
+
+Exercice 2:
+write  section 1, 2 et 3
+
+Exercice 3:
+
+La fonction printf utilisé sous d'autre système (issue d'une bibliothèque) et write est propre au système.
+
+Exercice 4:
+udpechoserveur.c
+udpclient.c
+
+Exercice 5 : htons  : convertie type pour pouvoir les envoyer sur le reseau 
+(convertit un entier court non signé hostshort depuis l'ordre des octets de l'hôte vers celui du réseau)
+
+Exercice7 : htonl; (convertit un entier non signé hostlong depuis l'ordre des octets de l'hôte vers celui du réseau)
+
+Exercice 11 : 
+non il n'est pas adapté puisque car udp n'a pas daccusé de reception (on ne sait pas quand la communication est fini)
+
+Exercice 12 : 
+
+il y a 			 socket a gerer
+
+Exercice 15 : 
+car avec tcp fonctionne avec des accusés de reception
+Exercice 16 : 
+Exercice 17 : 
+
