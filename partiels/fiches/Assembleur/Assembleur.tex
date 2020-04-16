@@ -1,0 +1,339 @@
+\documentclass[5pt]{article}
+\usepackage{graphicx}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\renewcommand{\abstractname}{Architecture des système}
+\usepackage{array, tabularx}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\usepackage{geometry}
+\geometry{hmargin=1cm,vmargin=1cm}
+
+\makeatletter
+\renewcommand{\subsubsection}{\@startsection {section}{1}{\z@}%
+             {-1ex \@plus -1ex \@minus -.2ex}%
+             {1ex \@plus.2ex}%
+             {\normalfont\scriptsize\sffamily\bfseries}}
+\renewcommand{\subsection}{\@startsection {section}{1}{\z@}%
+             {-1ex \@plus -1ex \@minus -.1ex}%
+             {1ex \@plus.1ex}%
+             {\normalfont\small\sffamily\bfseries}}
+\makeatother
+
+\begin{document}
+\begin{scriptsize}
+\title{Assembleur}
+\date{}
+\begin{abstract}
+Fiche Programmation assembleur x86 
+\end{abstract}
+\subsection{Introduction}
+Assembleur x86  = langage de génération 1\\
+Avantage : exécution très rapide \\
+Inconvénients :
+très bas niveau (très peu user-friendly); pas portable; beaucoup de contraintes de programmation (langage très technique)\\
+Un assembleur par architecture de processeur : famille x86 \\
+– famille de processeurs incluant Intel Pentium, Intel i7, AMD Phenom, AMD Athlon, etc. –ex processeur 8086 : 1978 \\
+manipule 8 bits, 16 bits ou 32 bits ;
+syntaxe Intel (et non pas syntaxe ATetT) ;
+environnement : système d'exploitation Linux, logiciel nasm\\
+Exectution Exemple:\\
+\begin{tabularx}{\linewidth}{|Y|Y|Y|Y|}
+\hline
+nasm -f elf hello-world.asm &
+ld -m elf\_i386 -o hello-world hello-world.o
+./hello-world &
+Désassemblage : objdump -d hello-world -M intel&
+Déboguage : gdb hello-world 
+\\ \hline
+\end{tabularx}
+
+\subsection{Registres et mémoire }
+\begin{tabularx}{\linewidth}{|X|}
+\hline
+Registres : variables internes au processeur , accès très rapide, mais faible nombre de registres , les registres sont spécialisés\\
+Registres de données :\\
+registres 32 bits : EAX, EBX, ECX, EDX  : très utilisés (manipulation des données, appel de fonctions, etc.)\\ chacun comprend un registre 16 bits (AX, BX, CX, DX)\\ chaque registre 16 bits comprend deux registres 8 bits (AH, AL, BH, BL, CH, CL, DH, DL)
+\\\hline
+Mémoire : décomposée en segments (blocs) et en offsets (index) \\
+variables globales, variables locales, allocation dynamique \\
+pile d'appels de fonction (schéma)\\
+Registres de segments : code : CS ; données : DS ; supplémentaires : ES, FS, GS ; pile : SS
+\\\hline
+Registre d'index : code : IP ; données : DI, SI; pile : SP, BP\\
+Registre des indicateurs : indicateur de zéro : ZF ; indicateur de signe : SF ; indicateur d'interruptions : IF ; etc\\
+\\ \hline
+\end{tabularx}
+Adressage :\\
+\begin{tabularx}{\linewidth}{|Y|Y|}
+\hline
+adressage direct : le contenu de la case 0x100 se dit [0x100] (ou DS:[0x100]) &
+adressage indirect : le contenu de la case dont l'adresse est la valeur de DI (ou de SI) : [DI] (très utilisé)\\\hline
+adressage basé : le contenu de la case dont l'adresse est la valeur de BX : [BX] (ou avec BP, mais utilise le segment SS dans ce cas) (peu utilisé)&
+adressage indirect basé avec déplacement : [DI+BX+4] (très peu utilisé
+\\ \hline
+\end{tabularx}
+\subsection{Instructions assembleur }
+\begin{tabularx}{0.5\linewidth}{|Y|}
+\hline
+•Affectation : MOV destination, valeur \\
+Remarques : 'valeur' peut être une constante, un registre, une zone mémoire et une zone mémoire peut être désignée par : [constante], [registre], [registre+constante], [registre+BP+constante] 
+\\on peut préciser le segment en utilisant segment: [offset], ou [segment:offset]\\
+\\ \hline
+\end{tabularx}
+\begin{tabularx}{0.5\linewidth}{|Y|}
+\hline
+•Contraintes \\
+on ne peut pas désigner deux zones mémoire dans un MOV, il faut passer par un registre intermédiaire \\
+on ne peut pas modifier avec un MOV certains registres (IP, registres de segments) \\
+implicitement, DS est utilisé, sauf avec B
+\\ \hline
+\end{tabularx}
+\textbf{Instructions}  \\
+\noindent
+\begin{tabularx}{\linewidth}{|>{\setlength\hsize{0.5\hsize}}Y|>{\setlength\hsize{0.8\hsize}}Y|>{\setlength\hsize{1.5\hsize}}Y|>{\setlength\hsize{1.2\hsize}}Y|}
+\hline
+Type & Nom & Remarque & contrainte\\ \hline
+Logiques  & AND destination, valeur&&\\ \hline
+& OR destination, valeur&&\\ \hline
+& NOT destination&&\\ \hline
+& XOR destination, valeur&&\\ \hline
+arithmétiques   & ADD destination, valeur&&\\ \hline
+& SUB destination, valeur&&\\ \hline
+& IMUL registre1, opérande2& multiplie r1 et o2, et stocke résultat dans r1&\\ \hline
+& IDIV opérande &divise le contenu de EDX:EAX par l'opérande, place le quotient dans EAX et le reste dans EDX&\\ \hline
+Comparaisons& CMP a, b&&\\ \hline
+Branchements   & JMP destination  &(inconditionnels)&\\ \hline
+Branchements   & JE/JNE/JG/JGE/JL/JLE dest &(conditionnels)si égalité ZF=0etCF=0/si non-égalité ZF=0/si supérieur ZF=0etSF=OF/si sup et eg/ si inf /si inférieur ou égal ZF=1ouSF!=OF&\\ \hline
+Remarques/autres& JMP segment:[offset]&&\\ \hline
+Boucle & LOOP label &décrémente CX et effectue un saut au label désigné&\\ \hline
+Fonctions & call label&pour appeler la fonction &\\ \hline
+Fonctions & ret& pour sortir de la fonction&\\ \hline
+Pile &&utilisée pour les arguments des fonctions, et pour sauvegarder le contexte lors d'interruption. utilise SS:ESP&\\ \hline
+Pile & push valeur &empilement (ESP diminue)&\\ \hline
+Pile & pop valeur &dépilement (ESP augmente)&\\ \hline
+Interruption & int numéro&appeler une interruption&\\ \hline
+Interruption & iret&sortir d'une interruption&\\ \hline
+\end{tabularx}
+\\
+Les registres d’offset :esi,edi,ebp et esp.\\
+
+\noindent
+\begin{tabularx}{0.5\linewidth}{|>{\setlength\hsize{0.5\hsize}}Y|>{\setlength\hsize{1.5\hsize}}Y|}
+\hline
+Nom & Utilisation\\ \hline
+0x0 à 0x7 & processeur \\ \hline
+0x8 à 0xf & périphériques \\ \hline
+0x10 & vidéo \\ \hline
+0x13  & accès aux disques\\ \hline
+0x16  & clavier \\ \hline
+\end{tabularx}
+\begin{tabularx}{0.5\linewidth}{|>{\setlength\hsize{0.5\hsize}}Y|>{\setlength\hsize{1.5\hsize}}Y|}
+\hline
+Nom & Utilisation\\ \hline
+0x1C  & horloge \\ \hline
+0x20  &  DOS : terminer un programme  \\ \hline
+0x21  & DOS : API \\ \hline
+0x28  & DOS : boucle d'attente du shel \\ \hline
+80h   & DOS : Unix : API, util pour les appels systèmes Unix   \\ \hline
+\end{tabularx}
+\begin{tabularx}{0.5\linewidth}{|X|}
+\hline
+Appels systèmes sous Linux \\
+$\tab$unistd.h contient les numéros de chaque appel système \\
+$\tab$le numéro de l'appel système est dans EAX \\
+$\tab$les paramètres sont passés via EBX, ECX, EDX, ESI, EDI, EBP (dans l'ordre)
+\\\hline
+\end{tabularx}
+\subsection{Exemples}
+\textbf{... exemple calcule, boucle, algos,...}  \\
+\noindent
+\begin{tabularx}{0.333\linewidth}{|Y|}
+\hline
+$\tab$//xor ax,ax\\i=0
+$\tab$mov ax,0\\i=0
+$\tab$mov bx,100\\j=100
+debut:\\
+$\tab$cmp ax,20\\
+$\tab$jl fin\\
+$\tab$cmp bx,50\\
+$\tab$jge fin\\
+$\tab$mov dx,ax\\
+$\tab$imul dx,2\\
+$\tab$sub bx,dx\\
+$\tab$cmp bx,10\\
+$\tab$jge else\\
+$\tab$add bx,120\\
+$\tab$jmp endif\\
+$\tab$else:...\\
+$\tab$endif:\\
+$\tab$inc ax\\
+$\tab$jmp debut\\
+fin:\\
+OU Inverse\\
+debut :\\
+$\tab$. . .\\
+$\tab$inc   ax;\\
+$\tab$cmp   ax,10\\
+$\tab$jg debut
+\\ \hline
+\end{tabularx}
+\begin{tabularx}{0.333\linewidth}{|Y|}
+\hline
+section .data\\
+table: db 'Hello', 3\\
+size: equ \$ - table\\
+char: db 0\\
+section .text\\
+global \_start\\
+\_start:\\
+    $\tab$mov al, [table]; on instancie le minimum avec le premier élément de la table\\
+    $\tab$mov ebx, 0 ;offset\\
+find\_minimum:\\
+.loop:\\
+    $\tab$cmp ebx, size\\
+    $\tab$jae subtract\\
+    $\tab$cmp al, [table+ebx]\\
+    $\tab$jb .no\_update ; Si le caractère n'est pas < minimum on ne fait rien\\
+    $\tab$mov al, [table+ebx]\\
+    $\tab$.no\_update:\\
+    $\tab$inc ebx\\
+    $\tab$jmp .loop\\
+subtract:\\
+    $\tab$mov ebx, 0\\
+.loop:\\
+    $\tab$cmp ebx, size\\
+    $\tab$jae end\_loop\\
+    $\tab$sub [table+ebx], al ; on soustrait la valeur\\
+    $\tab$; et on affiche pour vérifier que tout fonctionne\\
+    $\tab$push eax\\
+    $\tab$mov dl, [table+ebx]\\
+    $\tab$push ebx\\
+    $\tab$mov eax, 4\\
+    $\tab$mov ebx, 1\\
+    $\tab$mov [char], dl\\
+    $\tab$mov ecx, char\\
+    $\tab$mov edx, 1\\
+    $\tab$int 0x80 \\
+    $\tab$pop ebx\\
+    $\tab$pop eax \\
+    $\tab$inc ebx\\
+    $\tab$jmp .loop\\
+end\_loop:\\
+    $\tab$mov eax, 1\\
+    $\tab$mov ebx, 0\\
+    $\tab$int 0x80\\
+\\ \hline
+\end{tabularx}
+\begin{tabularx}{0.333\linewidth}{|Y|}
+\hline
+tri par bulle, pour un tableau table de taille n\\
+section .data\\
+table: db 'teststring'\\
+n: equ \$ - table\\
+section .text\\
+global \_start\\
+\_start:\\
+mov al, 0\\
+.loop\_i: ; i est implémenté avec al\\
+    $\tab$cmp al, n\\
+    $\tab$jae .end\_loop\_i\\
+    $\tab$mov ebx, 1 ; j est stocké dans ebx (taille 32 bits pour les offsets)\\
+    $\tab$.loop\_j:\\
+    $\tab$mov ecx, n\\
+    $\tab$sub ecx, eax\\
+    $\tab$cmp ebx, ecx ; j n'a pas besoin d'aller au dela de n-i-1\\
+    $\tab$jae .end\_loop\_j\\
+        $\tab\tab$;on place [table + ebx] dans cl pour pouvoir utiliser cmp\\
+        $\tab\tab$mov cl, [table + ebx]\\
+        $\tab\tab$cmp cl, [table + ebx - 1]\\
+        $\tab\tab$jae .no\_swap ; si t[j] > t[j-1] il n'y a rien à faire\\
+            $\tab$ $\tab$; on met t[j-1] dans t[j]\\
+           	$\tab$ $\tab$mov dl, [table + ebx-1]\\
+            $\tab$ $\tab$mov [table + ebx], dl\\
+            $\tab$ $\tab$mov [table + ebx - 1], cl ; on met t[j] dans t[j-1]\\
+        $\tab\tab$.no\_swap:\\
+        $\tab\tab$inc ebx\\
+    $\tab$jmp .loop\_j\\
+    $\tab$.end\_loop\_j:\\
+    $\tab$inc al\\
+jmp .loop\_i\\
+.end\_loop\_i:\\
+ mov eax, 0\\
+.loop\_print:\\
+    $\tab$cmp eax, n\\
+    $\tab$jae end\_print\\
+    $\tab$mov ecx, table\\
+    $\tab$add ecx, eax\\
+    $\tab$push eax\\
+    $\tab$mov eax, 4\\
+    $\tab$ mov ebx, 1\\
+    $\tab$mov edx, 1\\
+    $\tab$int 0x80\\
+    $\tab$pop eax\\
+    $\tab$inc eax\\
+    $\tab$jmp .loop\_print\\
+end\_print:\\
+    $\tab$mov eax, 1\\
+    $\tab$mov ebx, 0\\
+    $\tab$int 0x80\\
+\\ \hline
+\end{tabularx}
+\\
+...
+\\
+\\
+\begin{tabularx}{0.333\linewidth}{|Y|}
+\hline
+accès à la libc en assembleur:\\
+utilisation de "extern" et utilisation de "main" au lieu de "\_start" (car "\_start" est redéfini par le linker) : la fonction doit respecter l'interface imposée (pour ne pas avoir d'effet de bord)\\
+(exemple avec extern puts, exit)\\
+\hline
+int main() \{\\
+$\tab$int value = 100;\\
+$\tab$asm( "mov eax, \%0;"\\
+$\tab\tab$"inc eax;"\\
+$\tab\tab$"mov \%0, eax;"\\
+$\tab\tab$:"=r"(value):"r"(value)\\
+$\tab$);\\
+$\tab$printf("Hello world");\\
+$\tab$printf("value is \%d (should not be ", value);\\
+$\tab$printf("equal to 100 anymore)");\\
+$\tab$return 0; \\
+\}\\
+\\ \hline
+\end{tabularx}
+\begin{tabularx}{0.333\linewidth}{|Y|}
+\hline
+\\ \hline
+\end{tabularx}
+\begin{tabularx}{0.333\linewidth}{|Y|}
+\hline
+\\ \hline
+\end{tabularx}
+\\
+\begin{tabular}{|c|c|}
+\hline
+\begin{tabularx}{0.5\linewidth}{|Y|}
+\hline
+compiler avec "gcc -masm=intel -o methode2 methode2.c"\\
+Pour accéder aux variables en écriture, on utilise "=r" (pour registre)\\
+Pour accéder aux variables en lecture, on utilise "r"\\
+ Dans la partie assembleur, on utilise \%0, \%1, etc
+\\ \hline
+\end{tabularx} 
+&
+\begin{tabularx}{0.5\linewidth}{|Y|}
+\hline
+optimiser le code assembleur produit par du C  \\
+gcc -S -masm=intel methode3.c  \\
+modifier le fichier methode3.s  \\
+gcc -o methode3 methode3.s
+\\ \hline
+\end{tabularx} 
+\\ \hline
+\end{tabular}
+\subsection{Autres}
+•
+$\bullet\tab$
+\end{scriptsize}
+\end{document}

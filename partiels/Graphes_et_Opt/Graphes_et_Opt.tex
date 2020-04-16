@@ -1,0 +1,148 @@
+\documentclass[5pt]{article}
+\usepackage{graphicx}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage{array, tabularx}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\usepackage{geometry}
+\geometry{hmargin=1cm,vmargin=1cm}
+
+\begin{document}
+\begin{scriptsize}
+\title{Graphes et Optimisation}
+\date{}
+\begin{abstract}
+resumé
+\end{abstract}
+\subsection{Les graphes}
+\textbf{Rappels de graphe :}  \\
+\noindent
+\begin{tabularx}{\linewidth}{|Y|Y|Y|}
+\hline
+Graphe G(V,E) non orienté &
+Graphe G(V,E) orienté &
+Extrémité d'une arête, d'un arc.\\ \hline
+Incidence. Adjacence $\vert$ Graphe complet &
+Sous graphe. Sous graphe Induit. Graphe partiel &
+Chaîne. Chemin \\ \hline
+Cycle. Circuit. Graphe acyclique. &
+Connexité : Un graphe est connexe ssi entre tout couple de sommets existe une chaîne. &
+Forte connexité: Un graphe est fortement connexe ssi entre tout couple de sommets existe un chemin. \\ \hline
+\end{tabularx} 
+\\
+Une Coupe dans un graphe G = (V,E) est un sous ensemble d'arêtes dont une extremité exactement est dans S $\subset$ V. \\
+\tab Notation [S,V $\setminus$ S] = $\delta$(S) = $\lbrace$ e = uv $\in$ E : u $\in$ S,v $\in$ V $\setminus$ S $\rbrace$ \\Un arbre A = (V,E) est un graphe connexe sans cycle. Un arbre est tel que: \\
+\noindent
+\begin{tabularx}{\linewidth}{|Y|Y|}
+\hline
+\tab$\bullet \mid E\mid = \mid V\mid -1$, &
+\tab$\bullet$ il existe exactt une chaîne entre tt couple de sommets\\\hline
+\tab$\bullet$sans cycle maximal &
+\tab$\bullet$connexe minimal \\ \hline
+\end{tabularx}
+\\
+Un graphe $G = (V,E)$ est biparti si $V = V 1 \cup V 2 $ avec $ V 1 \cap V 2 = \emptyset $ et $ E = \delta(V1) = \delta(V2)$.\\Tous les cycles d'un graphe biparti sont de longueur paire. Un réseau est un graphe oriente G = (V,E) dont les arcs ou les noeuds sont munis d'une ou plusieurs valeurs. \\Dans la suite, nous utiliserons les notations et notions suivantes : \\
+\begin{tabularx}{\linewidth}{|Y|Y|}
+\hline
+\tab$\bullet\forall i \in V,bi < 0$ est une demande et$ bi > 0 $est une  offre. &
+\tab$\bullet\forall(i,j) \in E,ci,j$ = un cout unit pr traverser l'arc $ij (< C)$. \\ \hline
+\tab$\bullet\forall(i,j) \in E,ui,j$ = une capacité $>$ pr l'arc $ij(> U)$. & 
+\tab$\bullet\forall(i,j) \in E,li,j$ = une capacite $<$ pr l'arc $ij(< L)$.
+\\ \hline
+\end{tabularx}\\ \\
+\textbf{Complexité d'un algorithme :}\\
+La complexité temps d'un algorithme est une fonction du nombre d'opérations élémentaires effectuées dans l'algorithme. \\
+On utilise la notation O pour donner un Ordre de grandeur de la complexité. \\
+Un algorithme a une complexité O(f (n)), si $\ni$ c et $n_{0}$ tels que le temps pris par l'algorithme dans le pire des cas est au plus c.f (n) pour n $>= n_{0}$.
+\\ \\
+\textbf{Probleme de Base dans les reseaux :} \\
+$\bullet$ Problème du plus court chemin : Il s'agit de trouver la façon la plus économique (temps, distance, diffculté,...) de passer d'un noeud d'un réseau à un autre. \\ Bellman : Graphe sans circuits Djikstra : Poids positifs Bellman-Ford : Général. Detecte les circuits négatifs\\... \\ 
+$\bullet$ Problème du Flot maximum : Il s'agit d'envoyer la plus grande valeur de Flot (quantité, volume, usagers,...) à travers un réseau entre deux points en tenant compte d'une capacité limitative.\\... \\ 
+$\bullet$ Problème de Flot de coût minimum : Il s'agit d'envoyer du Flot à travers un réseau entre deux points en tenant compte d'une capacité limitative et en minimisant le coût global de circulation.\\ 
+...
+\subsection{Optimisation dans les réseaux}
+\hrule\noindent
+\begin{tiny}
+\begin{tabularx}{\linewidth}{|Y|Y|} \hline
+...
+Théorème de Menger (1927)-Flots max et coupe Min:\\ \\
+(a) la valeur d'un Flot maximum dans R est égale au nombre maximum de st-chemins arcs-disjoints. \\
+(b) la capacité d'une coupe minimum dans R est égale au nombre minimum d'arcs dont la suppression detruit tous les st-chemins de R.\\ \hline
+Enoncé du théorème de Menger (1927) \\
+Soit G=(V,E) un graphe non orienté avec deux sommets non adjacents s et t et soit k un entier. Il existe k chaînes de s à t sommets(resp. arêtes)-disjointes si et seulement si t reste connecté à s après suppression de k-1 sommets différents de s et t (resp. arêtes) quelconques.\\ \\
+Conséquence (Whitney (1932))\\
+Un graphe non orienté G ayant au moins 2 sommets est k-arête-connexe si et seulement si pour chaque paire s,t $\in$ V(G) avec s 6= t, il existe k chaînes de s à t arêtes-disjointes. Un graphe non orienté G ayant au moins k + 1 sommets est k-connexe si et seulement si pour chaque paire s,t $\in$ V(G) avec s $\neq$ t, il existe k chaînes de s à t sommets-disjointes.
+\\
+\hline \end{tabularx}
+
+Exemple : Réseau Belge Belgacom\\
+$\bullet\tab$52 centres $\longrightarrow$ cycle hamiltonien. \\
+$\bullet\tab$Une panne sur ce cycle $\longrightarrow$ Reroutage $\longrightarrow$ Nouvelle route chargée en arêtes!! \\
+$\bullet\tab$Idée : Rechercher des 2-arêtes connexes avec des cycles bornés ( application avec des cycles de longueur 3 à 6 arêtes) et que l'union de ces cycles soit couvrante.
+\end{tiny}
+\hrule\noindent
+Voisinage : Notations G = (V,E) le réseau. $\forall$u $\in$ V,N(u) est l'ensemble des voisins et N[u] = {u}$\cup$N(u).\\
+Topologie \\
+Algo centralisé\\ 
+\begin{tiny}
+\noindent
+\begin{tabular}{|l|}\hline
+1)\\
+Structure : Arbre couvrant minimum (MST) Algorithme : \\
+$\tab$1 Prim ou Kruskall\\
+$\tab$2 Affecter aux noeuds une puissance correspondant aux arêtes de cet arbre \\
+\\
+2)\\
+Broadcast incremental power protocol (BIP) (adapté) :\\
+Données : Un Graphe G = (V,E) et la racine s, C : E $\longrightarrow$ R \\
+Résultats : Un arbre G0 \\
+\noindent
+\begin{tabularx}{\linewidth}{|Y|Y|}
+\hline
+$\bullet$1 $\forall$u $\in$ V,p(u) = 0 &
+$\bullet$2 marquer le noeud racine s \\ \hline
+$\bullet$3 Un noeud marqué appartient à l'arbre BIP un noeud non marqué n'y appartient pas encore. &
+$\bullet$4 Tant Que Il existe un noeud non marqué Faire choix arête (u,v) u marqué, v non marqué et minimise $C(u,v) - p(u) + C(u,v)$ \\
+&$\tab$p(u) = C(u,v) $\mid$ (v) = C(u,v)\\
+&Marquer v \\
+&Fin Tant Que \\ 
+\hline\end{tabularx}\\
+\hline\end{tabular}\\
+\\
+\end{tiny}
+Algo locaux:\\
+\begin{tiny}
+\noindent
+\begin{tabularx}{\linewidth}{|Y|}\hline
+1) \\
+1 LMST = $\emptyset$ \\
+2 Pour u $\in$ V Faire G0 = MST (N[u]) (Ce calcul nécessite pour le noeud u, une connaissance à deux sauts de son voisinage, puisqu'il est nécessaire pour un noeud de connaitre les arêtes entre ses voisins.) \\
+$\tab$1 Pour v $\in$ $N_{GO}$(u) Faire LMST = LMST $\cup$(u,v) \\
+$\tab$2 FinPour \\
+3 FinPour \\
+\\\hline
+2) \\
+Graphe de voisinage Relatif (RNG) Graphe G = (V,E); Poids p : E $\longrightarrow$ R ; RNG(G) = (V,ERNG) où : \\
+$\tab$ERNG = $\lbrace$(u,v) $\in$ E :\\
+$\tab\tab$il n'existe pas w $\in$ (N(u)$\cap$N(v)) tel que\\
+$\tab\tab$p(u,w) $<$ p(u,v) et p(v,w) $<$ p(u,v)$\rbrace$\\
+$\tab$On a alors :
+MST(G) $\subseteq$ LMST(G) $\subseteq$ RNG(G)
+\\ 
+\hline \end{tabularx}
+\end{tiny}
+\\
+\textbf{Structuration du réseau} \\
+$\bullet$Dominant :\\
+Graphe G = (V,E); D $\subset$ V est dominant si $\forall$u $\in$ V$\setminus$D, $\exists$v $\in$ D : u $\in$ N(v). \\
+$\bullet$Dominant Connexe sous-graphe induit par le dominant D est connexe. \\
+$\bullet$Dominant stable sous-graphe induit par le dominant D est vide d'arêtes.\\
+$\tab$Cardinalité minimum $\longrightarrow$ NP-Complet \\
+\\
+
+
+
+\subsection{TD \& TP}
+
+\end{scriptsize}
+\end{document}

@@ -1,0 +1,18 @@
+Alex Eselin:
+henri.esbelin@uca.fr
+
+Date rendu compte rendu TPs inconnu
+
+language: ...
+
+1) réaliser prg :
+entré graphe -> sortie: composantes connexes
+foret de poid minimum
+
+parcours des arcs dans l'ordre d'apparition
+
+! faire gestion des partitions !
+
+complement comparé : structure de base (arbre vu en cours) : graphique ou tableau
+
+gene graphe alea

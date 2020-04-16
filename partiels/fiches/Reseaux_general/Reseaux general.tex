@@ -1,0 +1,257 @@
+\documentclass[5pt]{article}
+\usepackage{graphicx}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\renewcommand{\abstractname}{Reseaux general}
+\usepackage{array, tabularx}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\usepackage{geometry}
+\geometry{hmargin=1cm,vmargin=1cm}
+
+\makeatletter
+\renewcommand{\subsubsection}{\@startsection {section}{1}{\z@}%
+             {-1ex \@plus -1ex \@minus -.2ex}%
+             {1ex \@plus.2ex}%
+             {\normalfont\scriptsize\sffamily\bfseries}}
+\renewcommand{\subsection}{\@startsection {section}{1}{\z@}%
+             {-1ex \@plus -1ex \@minus -.1ex}%
+             {1ex \@plus.1ex}%
+             {\normalfont\small\sffamily\bfseries}}
+\makeatother
+
+\begin{document}
+\begin{scriptsize}
+\title{Reseaux general}
+\date{}
+\begin{abstract}
+Fiche Architecture des réseaux et des ordinateurs 
+\end{abstract}
+\hrule\noindent
+\subsection{Introduction aux réseaux et modèles des réseaux en couches}
+Les réseaux sont constitués de plusieurs machines distantes: Problématique d’interopérabilité : normalisation des communications (standards, RFC, etc.)\\
+Les communications réseaux impliquent beaucoup de mécanismes \\
+Création de nombreux protocoles. Ils sont regroupés par fonctionnalités dans des couches \\
+Les données sont encapsulées (ex : les données HTML sont encapsulées dans des données HTTP, qui sont encapsulées dans un paquet TCP, qui sont encapsulées dans un paquet IP, qui sont encapsulées dans une trame Ethernet) \\
+\textbf{Modèle OSI: Sept couches}\\
+• OSI = Open Systems Interconnection : Proposition en 1978, normalisation en 1984 , Normalisé par l’ISO (International Standard Organization) \\
+\noindent
+\begin{tabularx}{\linewidth}{|>{\setlength\hsize{0.8\hsize}}Y|>{\setlength\hsize{0.3\hsize}}Y|>{\setlength\hsize{1.9\hsize}}Y|}
+\hline
+Couches & Protocoles & Utilité\\ \hline
+Physique (manipule des bits) (basse) & & • Modulation = transformation d’un signal binaire en un signal adapté au médium (ex : sinusoïde paramétrée avec amplitude / phase / fréquence) ; • Codage = manière dont les bits sont encodés (ex : codage de Manchester, codage de Manchester différentiel, codage NRZ, etc.)\\ \hline
+Liaison de données (manipule des trames) (basse) & & Adressage physique et partage du temps de parole: • Détection et correction d’erreur, retransmission • Tour de rôle, accès multiple avec contention\\ \hline
+Réseau (manipule des paquets) (intermédiaire) & & Adressage logique, routage et acheminement • Routage = calculer la route à suivre de la source à la destination • Acheminement = suivre la route calculée\\ \hline
+Transport (manipule des segments) (intermédiaires) & & Couche transport : communication de bout en bout : • Multiplexage\\ \hline
+Session (manipule des données) (haute) & &gère la reconnexion automatique\\ \hline
+Présentation (manipule des données) (haute) & & Encodage des données : • Codage • Compression • Chiffrement\\ \hline
+Application (manipule des données) (haute) & & Non spécifiée\\ \hline
+\end{tabularx} \\
+\\
+Modèle Internet (ou TCP/IP) : Conçu en 1976, mais non normalisé. Quatre couches :\\
+$\tab$1• Couche accès réseau (= couche physique + couche liaison de données)
+$\tab$2• Couche Internet (= couche réseau)\\
+$\tab$3• Couche transport (= couche transport)
+$\tab$4• Couche application (= c session + c présentation + c application)
+\subsection{Notions de base , differents protocoles Internet :}
+\begin{tabularx}{\linewidth}{|Y|Y|Y|}
+\hline
+IP = Internet Protocol (1981)\hrule\noindent
+• Fonctionnalités principales : adressage et acheminement • Pas de routage : rôle des protocoles de routage (RIP, OSPF, BGP, etc.) \\
+• Adressage : • IPv4 = 32 bits, IPv6 = 128 bits • Notation à points \\
+• Adressage IPv4 \\
+$\tab$• Classes A, B et C (et D et E) \\
+$\tab$• Masques de réseaux, adresse de réseaux, notation " /x " pour les x premiers bits à 1 dans le masque \\
+$\tab$• CIDR (= Classless Inter-Domain Routing)\\
+Acheminement = longest common prefix match : • Notion de route par défaut • Notion de passerelle (plutôt pour les équipements terminaux)\\
+Autres fonctionnalités : fragmentation, détection d’erreurs\\
+\\
+Schema TAB
+\\\hline
+ICMP = Internet Control Message Protocol (1981);
+Fonctionnalité : gestion des messages de contrôle d’IP\\
+Types de messages ICMP : 
+• Echo request et echo reply (ping) • Destination unreachable • TTL exceeded • Timestamp request et timestamp reply • Etc.
+\\\hline
+ARP = Address Resolution Protocol (1982)\\
+Fonctionnalité : donner l’adresse MAC d’une machine du réseau dont l’adresse IP est connue : Utilisé pour l’acheminement de proche en proche
+\\\hline
+UDP = User Datagram Protocol (1980)\hrule\noindent
+• Fonctionnalités principales : Multiplexage, au travers de ports (= numéros servant à identifier le service (côté serveur) ou l’application source (côté client))\\
+• Format de l’entête UDP
+\begin{tabular}{|c|c|}
+\hline
+Port source (16 bits) & Port destination(16 bits) \\\hline
+Longueur & Somme de contrôle
+\\\hline
+\end{tabular} \\
+Avantage/Incovenient: La création d’un client/serveur UDP est facile a priori, car il y a peu d’appels systèmes. Mais, il faut gérer les pertes éventuelles de paquets, la fragmentation, etc. UDP est un protocole rapide (autant qu’IP) mais non fiable (pas plus qu’IP). UDP est adapté aux communications temps-réel (visio-conférence, audioconférence, jeux, etc.)
+\\\hline
+TCP = Transmission Control Protocol (1980)\hrule\noindent
+Fonctionnalités principales :\\
+$\tab$• Multiplexage, au travers de ports\\
+$\tab$• Mode connecté : garantie de livraison + non duplication + ordonnancement\\
+$\tab$• Contrôle de flux, contrôle de congestion\\
+\\
+SCHEMA FORMAT\\\\
+• La création d’un client/serveur TCP est un peu plus compliqué a priori qu’avec TCP. Mais, le développement du reste de l’application est beaucoup plus simple\\
+• TCP est un protocole lent (par rapport à IP et UDP) mais fiable (contrairement à IP ou UDP). TCP est adapté aux communications fiables (transfert de fichier, transfert de texte)
+\\\hline
+DNS = Domain Name System (1983). Utilise le port 53 (en TCP et en UDP)\\
+Fonctionnalité principale : traduction de noms en adresses IP.Base de données distribuée (de manière hiérarchique) fournissant un service d’annuaire\\
+Enregistrements DNS : • Adresses IPv4 (A) et IPv6 (AAAA), alias (CNAME) • Serveurs de noms (NS) • Serveurs SMTP (MX) • Etc.\\
+\begin{tabular}{|l|}
+\hline
+Espace de noms = structure arborescente\\
+• Chaque nœud a un nom et des enregistrements associés\\
+• La descente dans l’arbre se fait en ajoutant un " . "\\
+• Un nœud peut déléguer la responsabilité d’une zone à un serveur de noms \\
+• Un domaine est un chemin, ou un nom lorsqu’il n’y a pas d’ambiguïté 
+\\\hline
+\end{tabular} \\
+\begin{tabular}{|l|}
+\hline
+Mécanisme de résolution d’adresses \\
+$\tab$• Un résolveur détermine le serveur de noms responsable d’un domaine en suivant le chemin dans l’arbre, en partant de la racine \\
+$\tab$• Des serveurs caches stockent ces informations temporairement \\
+$\tab$• Les serveurs caches implémentent souvent eux-mêmes les requêtes récursives\\\hline
+\end{tabular} \\
+Gestion des dépendances circulaires : enregistrements " glue " (glue records)\\
+• Exemple : Le serveur de noms du domaine " isima.fr. " est " ns.isima.fr. ". Pour connaître l’adresse IP de " www.isima.fr. ", un utilisateur obtient le nom " ns.isima.fr. ", qu’il doit résoudre. Mais pour résoudre " ns.isima.fr. ", qui est dans la zone " isima.fr. ", il faut résoudre " ns.isima.fr ". On a une dépendance circulaire.\\
+• Les dépendances circulaires sont évitées par les enregistrements glue : l’adresse IP du serveur de noms est donnée dans la réponse.
+\\ \hline
+\end{tabularx} \\
+\subsection{Protocoles web,  applicatifs classiques }
+\begin{tabular}{|l|}
+\hline
+\begin{tabularx}{\linewidth}{|Y|}
+\hline
+HTTP = HyperText Transfer Protocol (1996):\hrule\noindent
+$\tab$• Utilise le port 80 (parfois 8000 ou 8080)\\
+$\tab$• Un hypertexte est un texte pouvant contenir des liens vers d’autres ressources (incluant d’autres textes)\\
+Fonctionnalité principale : transférer des fichiers hypertextes \\
+$\tab$• Protocole synchronisé de type requête-réponse \\
+$\tab$• Un client demande un accès à des ressources HTTP, en utilisant des URL (Uniform Resource Locators). Les URL se décomposent en une adresse de serveur et une URI (Uniform Resource Identifier). \\
+$\tab$• HTTP permet de transférer des fichiers textes (généralement au format HTML) ou des fichiers binaires (images, sons, vidéos)
+\\\hline
+\end{tabularx}\\
+\begin{tabularx}{0.5\linewidth}{|Y|}
+\hline
+les requêtes : Format des requêtes
+\hrule\noindent
+\\• Une ligne contenant la requête (avec la méthode) • Des lignes d’entête de requête (optionnelles) • Une ligne vide • Un corps éventuel (optionnel)
+\hrule\noindent
+Méthodes de requêtes\\• GET : permet de demander une ressource • POST : pour soumettre une ressource (ou un formulaire) • OPTIONS : pour obtenir les méthodes supportées par le serveur pour une certaine URI • Etc.\\
+Entêtes de requêtes : • Accept (exemple : text/html) • Accept-Encoding (exemple : gzip) • Cookie (voir plus loin) • Host (utile en cas de proxy, obligatoire depuis HTTP 1.1) • User-Agent
+\\\hline
+\end{tabularx}
+\begin{tabularx}{0.5\linewidth}{|Y|}
+\hline
+les réponses
+\hrule\noindent
+Format des réponses : • Une ligne contenant le code de réponse et un message • Des lignes d’entête de réponse (optionnelles) • Une ligne vide • Un corps de réponse (optionnel)
+\hrule\noindent
+Codes de réponse : • 1XX = Information • 2XX = Succès • 3XX = Redirection • 4XX = Erreur client • 5XX = Erreur serveur\\
+Entêtes de réponse : • Content-Encoding (exemple : gzip) • Content-Language (exemple : fr, en) • Content-Length • Content-Type (exemple : text/html; charset=utf-8) • Date • Expires • Location (en cas de redirection)
+\\\hline
+\end{tabularx}\\
+\begin{tabularx}{\linewidth}{|Y|}
+\hline
+les cookies\\
+Certaines applications HTTP nécessitent de conserver un état • Exemple : une information d’authentification, un panier d’achats • Le serveur stocke associe les informations de connexion à une chaîne de caractères représentant la session de l’utilisateur • Le client stocke le numéro de la session dans un fichier texte, appelé cookie, et transfère ce numéro de session à chaque requête
+\\\hline
+EXEMPLE HTTP
+\\\hline
+\end{tabularx}
+\\\hline
+\end{tabular}
+\\
+\begin{tabular}{|l|}
+\hline
+FTP = File Transfer Protocol (1985) \\
+Fonctionnalité principale : transfert de fichiers:\\
+$\tab$• Connection séparée pour les commandes (port 21) et les données (généralement port 20)\\
+$\tab$• Dans le mode actif (par défaut), le client informe le serveur du port sur lequel il écoute pour recevoir les données (avec la commande PORT)\\
+$\tab$• Dans le mode passif (déclenché avec la commande PASV), c’est le serveur qui informe le client du port choisi\\
+\\
+\begin{tabularx}{0.5\linewidth}{|Y|}
+\hline
+Liste des commandes du client\\
+$\tab$• USER et PASS pour le login et le password\\
+$\tab$• CWD et CDUP pour changer de répertoire (descendre ou monter)\\
+$\tab$• DELE pour effacer un fichier\\
+$\tab$• HELP pour l’aide\\
+$\tab$• LIST et NLST pour les informations sur le répertoire ou le fichier\\
+$\tab$• PASV et LPSV pour entrer en mode passif (court ou long)\\
+$\tab$• PORT pour informer de l’adresse et du port pour le transfert de données\\
+$\tab$• PWD pour connaître le répertoire actuel • RETR pour télécharger un fichier\\
+$\tab$• TYPE pour changer le mode de transfert (ASCII ou binaire)
+\\\hline
+\end{tabularx}
+\begin{tabularx}{0.5\linewidth}{|Y|}
+\hline
+Liste des codes de réponse du serveur\\
+$\tab$• 1XX : réponse positive (début + milieu)\\
+$\tab$• 2XX : réponse positive (fin)\\
+$\tab$• 3XX : réponse positive en cours (en attente d’une autre requête)\\
+$\tab$• 4XX : réponse négative transitoire\\
+$\tab$• 5XX : réponse négative permanente\\
+$\tab$• 6XX : réponse protégée
+\\
+$\tab$• X0X : syntaxe\\
+$\tab$• X1X : information\\
+$\tab$• X2X : connection\\
+$\tab$• X3X : authentification\\
+$\tab$• X5X : système de fichiers
+\\\hline
+\end{tabularx} \\
+EXEMPLE\\
+\\\hline
+\end{tabular} \\
+\subsection{Protocoles email}
+\begin{tabular}{|l|}
+\hline
+\begin{tabularx}{\linewidth}{|Y|}
+\hline
+SMTP = Simple Mail Transfer Protocol (1982), port 25
+\hrule\noindent
+Fonctionnalité : transmission d’emails (mais pas la consultation d’emails)\\
+Commandes du client SMTP\\
+$\tab$• Commande MAIL : informe de l’adresse de l’émetteur\\
+$\tab$• Commande RCPT : informe de l’adresse du destinataire\\
+$\tab$• Commande DATA : informe du contenu du message (terminé par une ligne contenant uniquement " . ")\\
+Réponses du serveur SMTP\\
+$\tab$• 2XX (réponse positive), 4XX (réponse négative transitoire) ou 5XX (réponse négative permanente)\\
+\\
+EXEMPLE
+\\\hline
+\end{tabularx} \\
+\begin{tabularx}{0.5\linewidth}{|Y|}
+\hline
+POP3 = Post Office Protocol version 3 (1988), port 110
+\hrule\noindent
+$\tab$• Fonctionnalité : récupération/consultation d’emails \\
+$\tab$• Protocole requête-réponse très simple\\
+$\tab$• Les messages sont a priori transférés du serveur vers l’ordinateur de l’utilisateur
+\\
+\\
+EXEMPLE
+\\\hline
+\end{tabularx}
+\begin{tabularx}{0.5\linewidth}{|Y|}
+\hline
+IMAP = Internet Message Access Protocol (2003), port 143
+\hrule\noindent
+• Fonctionnalité : consultation d’emails\\
+• Permet au même utilisateur de se connecter simultanément depuis plusieurs clients\\
+• Permet de télécharger des emails partiellement\\
+• Permet de gérer des répertoires\\
+• Permet de faire des recherches côté serveur\\
+\\
+EXEMPLE
+\\\hline
+\end{tabularx} \\
+\\\hline
+\end{tabular} \\
+\subsection{Exemples Socket et manipulation reseaux}
+\end{scriptsize}
+\end{document}

@@ -1,0 +1,760 @@
+\documentclass[5pt]{article}
+\usepackage{graphicx}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\renewcommand{\abstractname}{Theorie des Langages}
+
+\usepackage{array, tabularx}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\usepackage{geometry}
+\geometry{hmargin=1cm,vmargin=1cm}
+
+
+\makeatletter
+\renewcommand{\subsubsection}{\@startsection {section}{1}{\z@}%
+             {-1ex \@plus -1ex \@minus -.2ex}%
+             {1ex \@plus.2ex}%
+             {\normalfont\scriptsize\sffamily\bfseries}}
+\renewcommand{\subsection}{\@startsection {section}{1}{\z@}%
+             {-1ex \@plus -1ex \@minus -.1ex}%
+             {1ex \@plus.1ex}%
+             {\normalfont\small\sffamily\bfseries}}
+\makeatother
+\begin{document}
+\begin{scriptsize}
+\title{Theorie des Langages}
+\date{}
+\begin{abstract}
+Fiche
+\end{abstract}
+\subsection{Introduction}
+$\bullet\tab$
+\textbf{tab titre}  \\
+\noindent
+\begin{tabularx}{\linewidth}{Y|Y|Y|}
+\hline
+... & ... & ...\\ \hline
+\\ \hline
+\end{tabularx} 
+\subsection{Langages}
+Un langage est un ensemble de mots, qui peut etre defini :\\
+\begin{tabularx}{\linewidth}{|>{\setlength\hsize{0.3\hsize}}Y|>{\setlength\hsize{1.7\hsize}}Y|}
+\hline
+\multicolumn{2}{|c|}{Un langage est un ensemble de mots, qui peut etre defini :}\\ \hline
+- En extension & liste exhaustive de tous les mots du langage. Exemple : un dictionnaire\\\hline
+- En comprehension & on commence une enumeration. Exemple : L=\{ab, aabb, aaabbb, ...\}\\\hline
+- En intension & on se donne des 'regles' Exemple : Tous les mots formes de 'a' et de 'b' qui comportent autant d'occurences de 'a' que d'occurences de 'b' et dont tous les 'a' sont en debut de mot.\\\hline
+- Inductivement&\\\hline
+\end{tabularx} 
+(Outils de definitions compacts des langages.)
+\subsubsection{Definition d'un langage}
+Les definitions inductives (en anglais : recursive definitions) Idee : 3 etapes : \\
+\begin{tabularx}{\linewidth}{|Y|Y|Y|}
+\hline
+1 une base d’objets appartenant a l’ensemble que l'on veut definir&
+2 des regles pour construire d'autres objets de l'ensemble a partir d'objets de la base ou d'objets deja construits.&
+3 declaration que les seuls objets de l’ensemble sont ceux construits en appliquant un nombre fini de fois les regles.\\\hline
+\end{tabularx} 
+(base pas forcement minimale;
+on donne souvent une definition inductive sous la forme base+regles)\\
+Exemple : Definissons l'ensemble PAIR des entiers pairs positifs :
+1) Base : 2 appartient a PAIR ,
+2) Regle : Si x est dans PAIR, alors x+2 est dans PAIR\\
+Pour montrer qu’un nombre est dans PAIR, on exhibera une suite d'application des regles.
+\subsubsection{Definition inductives}
+\begin{tabularx}{\linewidth}{|Y|}
+\hline
+Definition inductive d'un ensemble pas unique :
+Exemple On peut definir PAIR par: 
+1)Base : 2 est dans PAIR ,
+2)Regle : si x et y dans PAIR, alors x+y dans PAIR\\
+Avantage de la 2e definition : les preuves qu'un nombre appartient a PAIR sont plus courtes.
+\\\hline
+Definition formelle de la fermeture inductive:\\
+Definition Soit U un univers et B$\subset$U une base, soit $\Omega$ une famille d'operations sur U.\\
+On appelle fermeture inductive de B par $\Omega$ la partie E de U definie par :\\
+- initialisation : B$\subset$E\\
+- construction : $\forall$f $\in$ $\Omega$ et $\forall$x1,x2,...xn $\in$ E, si n est l’arite de f, si x=f(x1,x2,...xn) est defini, alors x$\in$E\\
+- fermeture : E est la plus petite partie de U qui contienne B et qui soit stable par $\Omega$.\\
+\hline
+Principe pour decrire des langages par une grammaire (procede formel de construction inductive du langage) sous la forme d’un axiome (la base) et d'un ensemble de regles de production.
+\\ \hline
+\end{tabularx} 
+\subsubsection{Definition sur les langages}
+\begin{tabularx}{\linewidth}{|Y|Y|}
+\hline
+Enoncé Definition & Exemple \\ \hline
+Un alphabet $\Sigma$ est un ensemble fini de caracteres.&
+$\Sigma$ = \{a,b\}\\\hline
+Un mot (appele aussi une chaıne) $\omega$ sur $\Sigma$ est une suite finie de symboles de $\Sigma$ juxtaposes.
+Sa longueur (= nombre de caracteres) est notee |$\omega$|.
+$|\omega|^{a}$ denote le nombre d'occurences de la lettre 'a'$\in$ $\Sigma$ dans le mot $\omega$.&
+$\Sigma$ = \{a,b\}, $\omega$ = aabaa est un mot sur $\Sigma$; |$\omega$| = 5, |$\omega$|a = 4.\\\hline
+Le mot vide, ne contenant aucun symbole, est note $\epsilon$.
+|$\epsilon$|=0.
+$\epsilon$ peut etre un mot d'un langage, mais n'est pas une lettre de l'alphabet.&\\\hline
+Definition Si $\alpha$ et $\beta$ sont 2 mots sur $\Sigma$, on appelle concatenation de $\alpha$ et $\beta$ le mot $\alpha\beta$,
+note $\alpha\circ\beta$, $\alpha$•$\beta$, $\alpha$.$\beta$, $\alpha\beta$&
+$\alpha$ = ab , $\beta$ = cd $\alpha$•$\beta$ = abcd\\\hline
+Concatenation avec le mot vide : $\alpha$•$\epsilon$ = $\epsilon$•$\alpha$ = $\alpha$.
+On notera an la concatenation de n occurences de a (n un nombre fini).
+$a^{0}$ denotera le mot vide $\epsilon$.&
+\\\hline
+On appelle facteur ou sous-mot d’un mot $\omega$
+un mot $\alpha$ tel qu’il existe 2 mots $\beta$ et $\gamma$, avec $\omega$ = $\beta\alpha\gamma$.&
+$\omega$ = abccdx cc est un facteur de $\omega$.\\\hline
+Si $\omega$ = $\alpha$.$\beta$ on dira que $\alpha$ est un prefixe de $\omega$, et que $\beta$ est un suffixe de $\omega$.&
+$\omega$ =abccdx abc est un prefixe (propre). abccdx est prefixe (mais pas propre). dx est suffixe.\\\hline
+Soit $\Sigma$ un alphabet, on appelle fermeture de Kleene de $\Sigma$, note $\Sigma*$, l’ensemble defini inductivement de la facon suivante\\
+-base : tous les caracteres de $\Sigma$ ainsi que le mot vide $\epsilon$ sont dans $\Sigma*$.\\
+-regle : si x et y sont dans $\Sigma*$, alors xy est dans $\Sigma*$. $\Sigma*$ est l’ensemble des mots sur $\Sigma$, de longueur finie, plus le mot vide $\epsilon$. &\\\hline
+Soit $\Sigma$ un alphabet, $\Sigma$+ est l’ensemble defini inductivement de la facon suivante :\\
+-base : tous les caracteres de $\Sigma$ sont dans $\Sigma$+.\\
+-regle : si x et y sont dans $\Sigma$+, alors xy est dans $\Sigma$+. $\Sigma$+ est l'ensemble des mots sur $\Sigma$, de longueur finie.&\\\hline
+On appelle langage (souvent note L) sur un alphabet $\Sigma$ un sous-ensemble de $\Sigma*$.&\\\hline
+$\overline{L1}$ est l'ensemble des mots de $\Sigma*$ qui ne sont pas dans L1.
+$\overline{L1}$ s'appelle le complementaire de L1.&\\\hline
+\end{tabularx} 
+\subsubsection{Operations sur les langages}
+\textbf{Operations:}  \\
+\noindent
+\begin{tabularx}{\linewidth}{|Y|Y|Y|}
+\hline
+$\cup$,$\cap$ :
+Soient L1 et L2 2 langages sur l’alphabet $\Sigma$ :
+$\rightarrow$L1 $\cup$L2 = \{$\omega$ | $\omega$ $\in$ L1 ou $\omega$ $\in$ L2\}
+$\rightarrow$L1 $\cap$L2 = \{$\omega$ | $\omega$ $\in$ L1 et $\omega$ $\in$ L2\}
+&
+Produit de 2 langages
+Soient L1 un langage sur l'alphabet $\Sigma$1
+et L2 un langage sur l'alphabet $\Sigma$2
+$\rightarrow$L1•L2=\{$\omega$1$\omega$2 $\in$ ($\Sigma$1 $\cup$ $\Sigma$2)$\ast$, $\omega$1 $\in$ L1 et $\omega$2 $\in$ L2\}
+&
+Fermeture de Kleene d’un langage :
+$\rightarrow$1 - $L^{0}$={$\epsilon$}
+$\rightarrow$2 - $L^{n}$=LL$^{n-1}$, $\forall$n$\geq$1
+$\rightarrow$3 - $L\ast$= $\cup$ $L^{n}$, n$\geq$0
+$\rightarrow$4 - L+=$\cup$ $L^{n}$, n>0
+\\ \hline
+\end{tabularx} 
+\subsubsection{Autres}
+\begin{tabularx}{\linewidth}{|Y|}
+\hline
+\textbf{L’ambiguïté}\\
+Definition Un phrase ambiguë est une phrase a laquelle on peut attribuer plusieurs sens.\\
+En informatique : conflit.\\
+Definition :
+Une interpretation d'une phrase ambigue est un sens que l'on attribue a cette phrase.\\
+Exemple 1 : C'est la voiture de l'etudiant qui a coule une bielle.\\
+Exemple 2 : L'expression 2 + 3 $\ast$ 4 est ambigue : Interpretation 1 : (2+3)$\ast$4 (le resultat est 20) Interpretation 2 : 2+(3$\ast$4) (le resultat est 14)\\\hline
+\textbf{Une hierarchie de langages}\\
+Chomsky a defini une hierarchie des langages (la hierarchie de Chomsky) en 4 grandes classes.\\
+\begin{tabular}{|l|l|l|l|}
+\hline
+Type 0: Langages recursivement enumerables.&
+1: Langages contextuels.&
+2: Langages algebriques(context-free).&
+3: Langages rationnels(reguliers).
+\\ \hline
+\end{tabular}
+Propriete : On a Type 3 subsetneq Type 2 subsetneq Type 1 subsetneq Type 0\\
+Ici étudde des langages de type 3 (les plus simples).\\\hline
+\end{tabularx} 
+\subsection{Les grammaires}
+Au depart :\\
+Backus et Naur introduisent Backus-Naur Form : Metalangage introduit pour ALGOL6\\
+Basee sur la definition inductive.\\
+Moyen simple et elegant de d'ecrire toutes les phrases permises d’un langage (de programmation)\\
+
+\subsubsection{Backus-Naur Form}
+On va utiliser les regles d'ecrites par cette 'grammaire' pour construire la phrase.\\
+On apppliquera a chaque etape une regle : c'est une etape de derivation.\\
+S $\rightarrow$ E\\E $\rightarrow$ E + E\\E $\rightarrow$ (E)\\E $\rightarrow$ 0E\\E $\rightarrow$ 1E\\E $\rightarrow$ 0\\E $\rightarrow$ 1 \\
+= Factorise : \\S $\rightarrow$ E\\E $\rightarrow$ E + E $\mid$(E)$\mid$0E$\mid$ 1E $\mid$ 0 $\mid$ 1\\
+ou arbre syntaxique\\
+\subsubsection{Definition formelle des grammaires}
+Definition\\
+Une grammaire est un quadruplet G = (N,T,P,S) ou :\\
+•N est l’ensemble des symboles non terminaux \\
+•T est l’ensemble des symboles terminaux : caracteres de l’alphabet \\
+•P est un ensemble de regles de production, de la forme $\alpha$ $\rightarrow$ $\beta$, avec $\alpha$ $\in$ (N $\cup$T)$^{+}$,$\beta$ $\in$  (N $\cup$T)*\\
+•S = symbole de depart appele l’axiome\\
+\\
+•Pour caracteres de N : on utilisera (habituellement) des majuscules.\\
+•Pour caracteres de T : on utilisera (habituellement) des minuscules.\\
+•Pour les regles de P, nos regles seront de la forme X $\rightarrow$ $\beta$, avec X $\in$ N et $\beta$ $\in$ (N $\cup$T)*.\\
+•L’axiome, note S (habituellement), est la base de la definition inductive, et c’est la racine de tout arbre de derivation valide\\
+\\
+Exemple :\\
+S $\rightarrow$ E\\
+E $\rightarrow$ E + E $\mid$(E)$\mid$0E$\mid$ 1E $\mid$ 0 $\mid$ 1\\
+N=\{ S,E \}\\
+T= \{0,1,(,),+\}\\
+P= \{S $\rightarrow$ E, E $\rightarrow$ E + E $\mid$(E)$\mid$0E$\mid$ 1E $\mid$ 0 $\mid$ 1 \}\\
+On peut avoir des regles de production dont la partie droite est reduite a $\epsilon$; on appelera ces regles des $\epsilon$-productions.\\
+\\
+Exemple :\\
+S $\rightarrow$ E\\
+E $\rightarrow$ E + E $\mid$(E)$\mid$0E$\mid$ 1E $\mid$ $\epsilon$\\
+Une autre grammaire pour le langage des expressions arithmetiques binaires simplissimes.\\
+\\
+Definition\\
+Pour une grammaire G, on note L(G) le langage engendre par G : c’est l’ensemble des mots que l’on peut definir a partir de l’axiome de G en appliquant un nombre fini de fois des regles de G.\\
+\\
+Exemple : Grammaire G1 : S $\rightarrow$ aS S $\rightarrow$ bS S $\rightarrow$ a S $\rightarrow$ b S $\rightarrow$ $\epsilon$\\
+Exemple 2 :\\
+Quel langage d'ecrit cette grammaire?\\Comment pourrait-on simplifier cette grammaire?\\Que se passe-t-il si on retire l’$\epsilon$-production?\\
+\\
+On veut traduire le langage sur $\Sigma$ = \{a,b\} ou tous les mots sont de la forme $\omega$ = $\alpha$ aa $\beta$\\
+Pour le mot : $\omega$ = abbaabb\\
+S $\rightarrow$ AaaB\\
+A $\rightarrow$ aA\\
+A $\rightarrow$ bA\\
+A $\rightarrow$ $\epsilon$\\
+B $\rightarrow$ aB\\
+B $\rightarrow$ bB\\
+B $\rightarrow$ $\epsilon$\\
+devient :\\
+S $\rightarrow$ AaaB $_{(1)}$\\
+A $\rightarrow$ aA $_{(2)}$ $\mid$bA $_{(3)}$ $\mid\epsilon$ $_{(4)}$\\
+B $\rightarrow$ aB $_{(5)}$ $\mid$bB $_{(6)}$ $\mid\epsilon$ $_{(7)}$\\
+(Les regles de production ont une numerotation implicite (de 1 a 7 ici).)\\
+\\
+Arbre syntaxique\\
+Definition\\
+Un arbre syntaxique est un arbre dont la racine est l’axiome (S), dont les noeuds internes sont etiquetes par des symboles de N, et dont les feuilles sont etiquetees par des symboles de T ou par le mot vide $\epsilon$. Chaque noeud interne correspond a une regle de production.
+\\
+EXEMPLE\\
+\\
+Pour un langage donne, il n’y a pas de grammaire unique ! \\
+Exemple :\\
+les deux grammaires suivantes d'ecrivent le meme langage :\\
+G1 : S $\rightarrow$ aS$\mid$bS$\mid$a$\mid$b$\mid\epsilon$\\
+G2 : S $\rightarrow$ aS$\mid$bS$\mid\epsilon$\\
+Definition On dit que deux grammaires G1 et G2 sont equivalentes, note G1 $\sim$ G2, si elles engendrent le meme langage, i.e. si L(G1) = L(G2).\\
+\subsubsection{Derivations}
+Si $\alpha$ $\rightarrow$ $\beta$ est une production de P, on note $\gamma$1$\alpha\gamma$2 $\Rightarrow$ $\gamma$1$\beta\gamma$2. On dit qu’on a procede a une derivation. On dit que $\gamma$1$\beta\gamma$2 se derive de $\gamma$1$\alpha\gamma$2.\\
+Exemple : S $\Rightarrow$ AaaA et AaaA $\Rightarrow$ aAaaA sont des derivations pour la grammaire G2 (S $\rightarrow$ AaaA; A $\rightarrow$ aA$\mid$bA$\mid\epsilon$).\\
+On peut etiqueter la derivation par le numero de la regle de production utilisee.\\
+\\
+Pour un nombre fini de derivations successives $\gamma$1$\alpha\gamma$2 $\Rightarrow$ $\gamma$1$\beta\gamma$2 $\Rightarrow$ $\omega$, on ecrit : $\gamma$1$\alpha\gamma$2 * $\Rightarrow$ $\omega$.\\
+Exemples :\\
+S $\Rightarrow$ AaaA $\Rightarrow$ aAaaA ou S * $\Rightarrow$ aAaaA\\
+S * $\Rightarrow$ abbaabb\\
+\\
+Definition\\
+On appelle derivation gauche une suite de derivations obtenues en choisissant a chaque etape le symbole non terminal le plus a gauche. On definit de facon similaire la derivation droite.\\
+Exemple de derivation gauche avec G2 : S $\rightarrow$ AaaB ;\\
+A $\rightarrow$ aA$\mid$bA|$\epsilon$; B $\rightarrow$ aB$\mid$bB$\mid\epsilon$ :\\
+S (1) $\Rightarrow$ AaaB (2) $\Rightarrow$ aAaaB (4) $\Rightarrow$ aaaB (6) $\Rightarrow$ aaabB (7) $\Rightarrow$ aaab\\
+\\
+Definition\\
+On appelle langage engendre par une grammaire G = (N,T,P,S) l’ensemble des mots $\omega$ de T* tels que S * $\Rightarrow$ $\omega$.\\
+On le note L(G).On dit qu’un mot $\omega$ est engendre par une grammaire G si $\omega$ $\in$ L(G)\\
+\subsubsection{Grammaires ambiguës}
+Definition\\
+Une grammaire G est dite ambigue s’il existe un mot $\omega$ de L(G) qui admet au moins deux arbres syntaxiques differents.\\
+Exemple :\\
+G1 : G1 : S $\rightarrow$ aS$\mid$bS$\mid$a$\mid$b$\mid\epsilon$\\
+Le mot $\omega$ = ab admet deux arbres syntaxiques differents :\\
+\\
+ARBRE SYNTAXIQUE
+\\
+Definition\\
+Un langage est dit ambigu si toutes les grammaires qui l’engendrent sont ambigues.\\
+Exemple : G1 : S $\rightarrow$ aS$\mid$bS$\mid$a$\mid$b$\mid\epsilon$\\
+G2 : S $\rightarrow$ aS$\mid$bS$\mid\epsilon$\\
+L(G1) = L(G2); G1 est ambigue mais G2 n’est pas ambigue, donc L(G1) = L(G2) n’est pas un langage ambigu.\\
+\subsubsection{Grammaires regulieres}
+Definition\\
+Une grammaire G est dite reguliere si toutes ses regles de production sont de la forme :\\
+A $\rightarrow$ $\alpha$B, avec : A $\in$ N,$\alpha$ $\in$ T*,B $\in$ N ou B = $\epsilon$\\
+Exemple : G1 : S $\rightarrow$ aS$\mid$bS$\mid$a$\mid$b$\mid\epsilon$
+\subsubsection{Decidabilite}
+Definition\\
+Un probleme est dit indecidable si il n’existe pas (et il ne peut pas exister) d’algorithme generique pour le resoudre.\\
+\\
+Les problemes suivants sur les grammaires sont indecidables : Deux grammaires G1 et G2 sont-elles equivalentes? Deux grammaires engendrent-elles des langages ayant un mot en commun? Y a-t-il des mots qu’une grammaire n’engendre pas?
+\subsubsection{Hierarchie de Chomsky sur les grammaires}
+\textbf{tab titre}  \\
+\noindent
+\begin{tabularx}{\linewidth}{|Y|Y|Y|}
+\hline
+Type & Nom & Type de production\\ \hline
+0 & Langages recursivement enumerables & X $\rightarrow$ Y X $\in$N+ , Y $\in$N (N $\cup$T)\\ \hline
+1 & Langages contextuels & X$\rightarrow$Y X $\in$NN+ , Y$\in$N(N$\cup$T)* , $\mid$Y$\mid\geq\mid$X$\mid$ \\ \hline
+2 & Langages context-free ou algebriques & X$\rightarrow$Y X $\in$NN , Y$\in$N(N$\cup$T)* \\ \hline
+3 & Langages rationnels (reguliers) & X$\rightarrow$Y A $\rightarrow$ $\alpha$B, avec : A $\in$ N,$\alpha$ $\in$ T*,B $\in$ N ou B = $\epsilon$\\ \hline
+\end{tabularx}
+\\
+\subsection{Langages rationnels}
+\subsubsection{Introduction aux langages rationnels}
+Hierarchie de Chomsky :\\
+Classe 3\\
+subsetneq Classe 2 deterministes subsetneq Classe 2 non deterministes \\
+subsetneq Classe 1\\
+subsetneq Classe 0\\
+\\
+Classe 3 de la hierarchie de Chomsky : Langages rationnels (’regular languages’)\\
+langages les plus simples, les plus rapides, et aussi les moins puissants.\\
+Ils servent : - en compilation a assurer l'analyse lexicale (segmentation d’un flot de caracteres en ’mots’) - pour la recherche de motifs - pour le traitement de texte - etc.\\
+\\
+Ces langages sont caracterises de plusieurs facons : ils sont :\\
+1 engendres par une grammaire reguliere.\\
+2 d'ecrits par une expression reguliere.\\
+3 engendres par un automate d'etats finis.
+\\
+Rappel :\\
+Definition\\
+Une grammaire G est dite reguliere si toutes ses regles de production sont de la forme : A $\rightarrow$ $\alpha$B, avec : A $\in$ N,$\alpha$ $\in$ T*,B $\in$ N ou B = $\epsilon$
+\\
+Exemple : G1 : S $\rightarrow$  aS$\mid$bS$\mid$a$\mid$b$\mid\epsilon$
+\\
+Theoreme Un langage est rationnel ssi il existe une grammaire reguliere qui l’engendre.
+\\
+Exemple de grammaire regliere :
+langage des mots sur $\Sigma$ = \{a,b\} qui contiennent le facteur aa :\\
+S $\rightarrow$ aS$\mid$bS$\mid$aA\\
+A $\rightarrow$ aB\\
+B $\rightarrow$ aB$\mid$bB$\mid\epsilon$
+\subsubsection{Les expressions regulieres}
+Une expression reguliere dèecrit un langage rationnel avec une syntaxe particuliere, et correspond a une grammaire reguliere.
+Exemples d’expressions regulieres sur $\Sigma$ = \{a,b\} : 1 (a + b)* est l’ensemble des mots sur \{a,b\} 2 (a + b)*aa(a + b)* langage des mots sur $\Sigma$ = \{a,b\} qui contiennent le facteur aa 3 b+(a + b)* : mots sur l’alphabet $\Sigma$ = \{a,b\} qui commencent par un ou plusieurs b\\
+\\
+Une expression reguliere est une expression algebrique qui permet de decrire un langage rationnel.\\
+Definition\\
+Definition inductive des expressions regulieres :\\
+- Base : $\emptyset$, $\epsilon$ et les caracteres de $\Sigma$ sont des expressions regulieres, representant respectivement les langages $\emptyset$,{$\epsilon$}, \{x\} si x $\in$ $\Sigma$.\\
+- Regles : si r et s sont des expressions regulieres representant les langages R et S, alors (r + s), r.s, r* et r+ sont des expressions regulieres representant respectivement les langages R $\cup$S, R.S, R* et R+.\\
+En anglais : ’regular expression’\\
+\\
+1 (a + b)* est l’ensemble des mots sur \{a,b\}\\
+2 (a + b)*aa(a + b)* langage des mots sur $\Sigma$ = \{a,b\} qui contiennent le facteur aa\\
+3 b+(a + b)* : mots sur l’alphabet $\Sigma$ = \{a,b\} qui commencent par un ou plusieurs b\\
+\\
+On notera L(r) le langage (rationnel) d'ecrit par l’expression reguliere r, et on dira que r engendre le langage L(r).\\
+Souvent, par abus de langage, on confond expression reguliere et langage engendre!\\
+\\
+Remarques :\\
+- r + s se note aussi r$\mid$s\\
+- r.s se note aussi rs\\
+- * a precedence sur + : a + b* s’interprete comme (a + (b*))\\
+\\
+Proprietes :\\
+1 (r*)* = r*\\
+2 r(r*) = (r*)r = r+\\
+3 (a*b*)* = (a + b)*\\
+\\
+Un meme langage rationnel peut etre d'ecrit par plusieurs expressions regulieres differentes.\\
+Exemple : langage des mots sur $\Sigma$ = \{a,b\} contenant le facteur ’aa’ :\\
+r = (a + b)*aa(a + b)* s = b*aa(a + b)*\\
+On a L(r) = L(s)\\
+\\
+Definition\\
+Si L(r)=L(s), on dira que r et s sont des expressions regulieres equivalentes, note r $\sim$s.\\
+\\
+Theoreme Un langage est rationnel si et seulement si il existe une expression reguliere le reconnaissant.
+\subsubsection{Les automates d’etats finis}
+Les automates d’etats finis (AEF) (en anglais : ”Finite State Automata” ou FA)\\
+Ce sont les ’machines’ reconnaissant les langages rationnels.\\
+\\
+Un systeme a etats finis est un modele mathematique ”discret”. Il est compose d’un nombre fini de configurations, appelees des etats, et d’actions permettant de passer d’un etat a un autre. Les automates d’etats finis sont des systemes a etats finis particuliers.\\
+\\
+Un automate d’etats finis est un graphe oriente fini dont les arcs sont etiquetes. Il est compose :\\
+1 d’un nombre fini de configurations (les etats), qui sont les sommets du graphe\\
+2 d’actions permettant de passer d’un etat a un autre (ces actions etiquettent les arcs du graphe)\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+De plus, on a un (unique) etat initial\\
+(START) et 0, 1 ou plusieurs etats finaux (STOP)\\
+\\
+Etiquetage de l’etat initial et des etats finaux :\\
+1 l’etat initial est note par une fleche\\
+2 les etats finaux ont un double cerclage\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+Principe (informel) : On part de l’etat initial (q0) et on parcourt le graphe jusqu’a ce qu’on decide de s’arreter sur un etat final (ici q2 ou q4).\\
+\\
+SCHEMA AUTOMATE\\
+\\
+Ce parcours definit un mot du langage reconnu par l’automate.
+\\
+\\
+SCHEMA AUTOMATE\\
+\\
+Le parcours definit le mot ’aabba’.
+\\
+Definition On peut etiqueter un arc d’un automate d’etats finis par le mot vide $\epsilon$ (souvent note par l’absence d’un caractere), il correspond a une $\epsilon$-transition.\\
+\\
+On peut etiqueter une transition par plusieurs caracteres : on en choisit un seul. On peut avoir des circuits, des boucles de reflexivite. On peut avoir plusieurs arcs sortants etiquetes par un meme caractere.\\
+\\
+Exemple :
+\\
+SCHEMA AUTOMATE\\
+langage reconnu : L(A) = {ab,ac}\\
+\\
+Exemple :\\
+\\
+SCHEMA AUTOMATE\\
+\\
+Un automate d’etats finis est donc defini par :\\
+- un nombre fini d’etats Q (les sommets du graphe)\\
+- un alphabet $\Sigma$.\\
+- un ensemble fini $\delta$ de transitions (les arcs du graphe), etiquetes chacune par une (ou plusieurs) lettre(s) de $\Sigma$ ou par $\epsilon$\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+Parmi les etats de Q, on distingue :\\
+l’etat initial q0 $\in$ Q (il y a exactement un etat initial)\\
+les etats finaux, qui constituent l’ensemble F $\subset$ Q (il peut y avoir plusieurs ou meme aucun etat final)\\
+\\
+Formellement : Definition Un automate d’etats finis est un quintuplet A = (Q,$\Sigma$,$\delta$,q0,F), ou :\\
+1 Q est un ensemble d’etats (de cardinal fini)\\
+2 $\Sigma$ est un alphabet (de cardinal fini)\\
+3 $\delta$ est une fonction de transition (qui permet de passer d’un etat a un autre)\\
+4 q0 $\in$ Q est l’etat initial\\
+5 F $\subseteq$ Q est l’ensemble des etats finaux\\
+\\
+Exemple classique d’un automate (extrait du livre de Hopcroft and Ullman : Introduction to Automata Theory, Languages and Computation)\\
+Le probleme du passeur, du loup, de la chevre et du chou.\\
+\\
+Question :\\
+Quel est l’ensemble des solutions qui permettent au passeur d’emmener de la rive droite a la rive gauche le chou, la chevre et le loup, avec une barque ne pouvant contenir que l’un des trois, sans laisser seuls ensemble ni le loup et la chevre, ni la chevre et le chou?\\
+\\
+\\
+SCHEMA AUTOMATE\\
+\\
+(M - Man), le loup (W - Wolf), la chevre (G - Goat) et le chou (C - Cabbage). Cet automate modelise toutes les solutions possibles.\\
+\\
+On peut deduire de cette modelisation par automate d’etats finis :\\
+1 qu’il y a une solution au probleme.\\
+2 qu’il y a deux plus courtes solutions etiquetees GMWGCMG et GMCGWMG.\\
+3 qu’il existe une infinite de solutions (le langage engendre par l’automate est infini).\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+Definition On dit qu’un automate d’etats finis A = (Q,$\Sigma$,$\delta$,q0,F)\\
+accepte un mot $\omega$ de $\Sigma$* si et seulement si il existe (au moins) un chemin dans A allant de q0 a un etat final, etiquete par les lettres successives de $\omega$, entre lesquelles on a eventuellement intercale des occurences de $\epsilon$.\\
+Le langage L(A) reconnu par A est l’ensemble des mots que A accepte.
+\\
+Exemple 2 :\\
+\\
+SCHEMA AUTOMATE\\
+langage reconnu : aab*a + b+ On peut avoir 2 transitions possibles avec la meme lettre : ici sur q2, 2 transitions avec 'b'.\\
+\\
+On definit la table de transitions d’un automate d’etats finis A = (Q,$\Sigma$,$\delta$,q0,F), qui d'ecrit la fonction de transition $\delta$.\\
+Sur l’exemple 2 :\\
+\begin{tabular}{|c|c|c|}
+\hline
+&a & b \\ \hline
+q0 &\{q1\} &\{q2\}\\ \hline
+q1 &\{q3\} &\{$\emptyset$\}\\ \hline
+q2 &\{$\emptyset$\} &\{q2,q4\}\\ \hline
+q3 &\{q4\} &\{q3\}\\ \hline
+q4 &\{$\emptyset$\} &\{$\emptyset$\}\\\hline
+\hline
+\end{tabular}
+\\
+ On va voir qu’il existe plusieurs sortes d’AEF.
+ Il existe des automates plus complexes (automates a pile, machine de Turing).
+\\
+SCHEMA AUTOMATE\\
+\\
+\subsection{Equivalences d'automate}
+il existe plusieurs types d’Automates d’Etats Finis\\
+ils sont equivalents
+\subsubsection{Le probleme du determinisme}
+La definition d’un automate d’etats finis n’interdit pas les ”conflits”.\\
+L = aab*a + ab*b\\
+\\
+SCHEMA AUTOMATE\\
+\\
+Comment doit-on interpreter $\delta$(q0,a)?\\
+\\
+Le choix est non-deterministe.\\
+\\
+Definition Un automates d’etats finis deterministe (AEFD) (en anglais : Deterministic Finite Automaton (DFA) ) est un automate d’etats finis tel que, de chaque etat q$\in$Q, il part |$\Sigma$| transitions, une pour chacune des lettres de l’alphabet $\Sigma$.\\
+Remarque : Pas d’$\epsilon$-transition!\\
+\\
+Dans un automate deterministe, on a un ’etat poubelle’, vers lequel on envoie toutes les transitions non definies.\\
+Souvent, cet etat poubelle est implicite.\\
+\\
+Exemple d’automate deterministe sur $\Sigma$ = {a,b} pour L = aab*a + ab*b :\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\subsubsection{Differentes sortes d'AEF}
+On definit 3 sortes d’automates d’etats finis :\\
+1 les automates d’etats finis non-deterministes sans $\epsilon$-transition (NFA-W, W pour”Without”)\\
+2 les automates d’etats finis non-deterministes avec $\epsilon$-transition (NFA-$\epsilon$)\\
+3 les automates d’etats finis deterministes\\
+\\
+Exemple : L = {a,ab,ba} *\\
+\\
+L = {a,ab,ba} * non deterministe avec $\epsilon$ -transition
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+L = {a,ab,ba} * non deterministe sans $\epsilon$ -transition\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+L = {a,ab,ba} * deterministe\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+L = {a,ab,ba} *\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+Theoreme\\
+La classe des langages reconnus par :\\
+- les automates d’etats finis deterministes\\
+- les automates d’etats finis non-deterministes sans $\epsilon$-transition\\
+- les automates d’etats finis non-deterministes avec $\epsilon$-transition est la meme : celle des langages rationnels.\\
+Preuve : constructive (algorithmes de passage d’un type d’AEF a un autre)\\
+
+\subsubsection{Determinisation d'un AEF avec $\epsilon$-transitions}
+- On part d’un AEF non deterministe A1 = (Q,$\Sigma$,$\delta$,q0,F) sans $\epsilon$-transition.\\
+- On calcule un automate d’etats finis deterministe A2 = (Q0,$\Sigma$,$\delta$0,Q0 0,F0), avec Q0 0 = \{q0\}\\
+\\
+Principe : On construit les etats et la table de transition de $\delta$0 :\\
+1 On construit la table de transition de $\delta$ (qui comporte des ensembles d’etats)\\
+\\
+2 Initialisation de $\delta$0\\
+- on commence par Q'0 =\{q0\}\\
+- on applique chaque caractere x de $\Sigma$ a Q'0\\
+- on obtient un ensemble d’etats qui est sera etat de 2'X\\
+\\
+3 Construction de $\delta$'\\
+- on choisit un etat Q0 de 2'X non encore traite\\
+- on applique chaque caractere x de $\Sigma$ chaque etat de Q0 avec $\delta$\\
+- on obtient un ensemble d‘etats 1 si cet ensemble ne correspond pas a un ete deja defini de 2'X, on cree un nouvel etat de 2'X\\
+\\
+4 les etats finaux de A2 sont ceux qui contiennent au moins un etat final de F\\
+\\
+Algo DETERMINISATION Donnee : un automate A1 = (Q,$\Sigma$,$\delta$,q0,F) Resultat : un automate deterministe A2 = (Q0,$\Sigma$,$\delta$0,Q0 0,F0). Initialisation : Q0 0 $\leftarrow${q0};ATRAITER $\leftarrow$ Q0 0 = {q0}; Q0 $\leftarrow${Q0 0}; tant que ATRAITER 6= $\emptyset$ faire CHOISIR Q0 dans ATRAITER; ATRAITER $\leftarrow$ ATRAITER - Q0; pour chaque caractere x de $\Sigma$ faire pour chaque etat Q de Q0 faire $\delta$0(Q0,x) $\leftarrow$ $\delta$0(Q0,x)$\cup\delta$(Q,x); si $\delta$0(Q0,x) n’est pas un etat de Q0 alors Q00 $\leftarrow$ $\delta$0(Q0,x); Q0 $\leftarrow$ Q0 +{Q00}; ATRAITER $\leftarrow$ ATRAITER + {Q00}; pour chaque etat Q0 de Q0 contenant un etat de F faire AJOUTER Q0 a F0; Retourner((Q0,$\Sigma$,$\delta$0,Q0 0,F0)).\\
+\\
+Exemple : L = \{ab,ac\}\\
+$\delta$ a b c q0 \{q1,q3\} \{$\emptyset$\} \{$\emptyset$\} q1 \{$\emptyset$\} \{q2\} \{$\emptyset$\} q2 \{$\emptyset$\} \{$\emptyset$\} \{$\emptyset$\} q3 \{$\emptyset$\} \{$\emptyset$\} \{q4\} q4 \{$\emptyset$\} \{$\emptyset$\} \{$\emptyset$\}\\
+\\
+Initialisation : Q0 0 = \{q0\}\\
+$\delta$0(Q0 0,a) = \{q1,q3\} : on cree un nouvel etat Q0 1 = {q1,q3}
+$\delta$0(Q0 0,b) = \{$\emptyset$\}; $\delta$0(Q0 0,c) = \{$\emptyset$\}\\
+\\
+On a un etat Q'1 = \{q1,q3\} qui n’est pas traite :\\
+$\delta$0(Q'1,a) = $\emptyset$ $\delta$0(Q'0,b) = \{q2\} : on cree un nouvel etat Q'2 = \{q2\} $\delta$0(Q'0,c) = \{q4\} : on cree un nouvel etat Q'3 = \{q4\}\\
+\\
+On traite l’etat Q'2 = \{q2\} : $\delta$0(Q'2,a) = $\delta$0(Q'2,b) = $\delta$0(Q'2,c) = $\emptyset$ On traite l’etat Q'3 = \{q4\} : $\delta$0(Q'3,a) = $\delta$0(Q'3,b) = $\delta$0(Q'3,c) = $\emptyset$ Etats finaux : Q'2 parce qu’il contient q2, et Q'3 parce qu’il contient q4.\\
+\\
+A la fin, on obtient :\\
+$\delta$ a b c q0 \{q1,q3\} \{$\emptyset$\} \{$\emptyset$\} q1 \{$\emptyset$\} \{q2\} \{$\emptyset$\} q2 \{$\emptyset$\} \{$\emptyset$\} \{$\emptyset$\} q3 \{$\emptyset$\} \{$\emptyset$\} \{q4\} q4 \{$\emptyset$\} \{$\emptyset$\} \{$\emptyset$\}\\
+\\
+$\delta$0 a b c\\
+Q0 0=\{q0\} \{q1,q3\}=Q0 1 \{$\emptyset$\} \{$\emptyset$\} Q0 1=\{q1,q3\} \{$\emptyset$\} \{q2\}=Q0 2 \{q4\}=Q0 3 Q0 2=q2 \{$\emptyset$\} \{$\emptyset$\} \{$\emptyset$\} Q0 3=q4 \{$\emptyset$\} \{$\emptyset$\} \{$\emptyset$\}\\
+\\
+Remarque : Etant donne un AEF non deterministe a k etats, l’AEF deterministe correspondant peut avoir 2k etats.\\
+\\
+On etend la technique de determinisation en etendant la fonction de transition $\delta$0(Qi,x) a une fonction donnee par les mots $\epsilon$*x$\epsilon$*.\\
+\\
+Definition\\
+On appelle $\epsilon$-fermeture d’un etat q l’ensemble des etats qi atteignables a partir de q par un chemin etiquete uniquement par le mot vide $\epsilon$.\\
+Definition\\
+On appelle $\epsilon$-fermeture d’un ensemble Q d’etats l’union des $\epsilon$-fermetures des etats appartenant a Q.\\
+\\
+Exemple : a*b*c*\\
+\\
+SCHEMA AUTOMATE\\
+\\
+$\epsilon$-fermeture(q0) = \{q0,q1,q2\}\\
+$\epsilon$-fermeture(q1) = \{q1,q2\}\\
+$\epsilon$-fermeture(q2) = \{q2\}\\
+\\
+Principe de determinisation :\\
+Pour un etat Q0 de l’AEF deterministe en cours de calcul :\\
+1 On part de l’$\epsilon$-fermeture de Q0.\\
+2 On calcule $\delta$(Q0)\\
+3 On calcule l’$\epsilon$-fermeture de $\delta$(Q0)\\
+4 On obtient un etat du nouvel automate\\
+Les etats finaux du nouvel automate sont ceux qui contiennent au moins un etat final de l’automate de depart.\\
+\\
+Exemple : a*b*c* :\\
+\\
+SCHEMA AUTOMATE\\
+\\
+$\delta$ a b c\\
+$\epsilon$ q0 \{q0\} \{$\emptyset$\} \{$\emptyset$\} \{q0,q1,q2\} q1 \{$\emptyset$\} \{q1\} \{$\emptyset$\} \{q1,q2\} q2 \{$\emptyset$\} \{$\emptyset$\} \{q2\} \{q2\}\\
+Construction de $\delta$0, Q0 0=$\epsilon$-fermeture(q0)=\{q0,q1,q2\}\\
+\\
+a*b*c*\\
+\\
+SCHEMA AUTOMATE\\
+\\
+$\delta$0 a b c\\
+Q0 0 = \{q0,q1,q2\} \{q0\}$\rightarrow$ Q0 0 \{q1\}$\rightarrow$\{q1,q2\}=Q0 1 \{q2\}$\rightarrow$\{q2\}= Q0 1 = \{q1,q2\} \{$\emptyset$\} \{Q0 1\} \{Q0 2\} Q0 2 = \{q2\} \{$\emptyset$\} \{$\emptyset$\} \{Q0 2\}\\
+\\
+a*b*c*\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\subsubsection{Minimisation d'un AEF deterministe}
+Theoreme\\
+(de Nerode - Myhill) : Pour un langage rationnel donne L, il existe un automate d’etats finis deterministe canonique (uniquement defini), et qui comporte un nombre minimum d’etats (parmi tous les automates deterministes), reconnaissant L.\\
+Il existe un algorithme tres efficace de minimisation.\\
+\\
+Principe de minimisation d’un automate d’etats finis deterministe : utilise le principe algorithmique d’eclatement de partitions.\\
+\\
+Rappel : une partition d’un ensemble est la definition d’un ensemble de classes, tel que l’union de toutes les classes est l’ensemble de depart et l’intersection de deux classes est vide (une partition correspond a une relation d‘’equivalence)\\
+Principe algorithmique d’eclatement de partitions (ou d’affinement de partitions)\\
+1 on part d’une (ou plusieurs) (grandes) classes\\
+2 on a un critere qui permet de partitionner un classe en plusieurs classes plus petites\\
+3 on arrete quand chaque classe obtenue est non-partitionnable\\
+\\
+Pour minimiser un AEF deterministe :\\
+1 on retire les etats non atteignables;\\
+2 on partitionne l’ensemble des etats en deux classes : 1 les etats finaux 2 les etats non finaux (y compris l’etat poubelle $\emptyset$)\\
+\\
+Etape d‘eclatement d‘une classe Ci :\\
+1 appliquer a Ci une transition par un caractere x de $\in$ $\Sigma$;\\
+2 separer les elements de Ci qui n’aboutissent pas a la meme classe\\
+\\
+On repete jusqu’a ce qu’il n’y ait plus d’eclatement possible.\\
+A la fin, on a pour toute classe Ci obtenue : $\forall$x $\in$ $\Sigma$, $\forall$q,q0 $\in$ Ci, $\delta$(q,x) = $\delta$(q0,x)\\
+On obtient la description d’un nouvel AEF deterministe, dont l’etat initial est l’etat contenant q0 et dont les etats finaux sont les etats contenant un etat final de l’automate de depart.\\
+\\
+Exemple : L = \{ab,ac\}\\
+SCHEMA AUTOMATE\\
+\\
+On part de C1 = \{q3,q4\} et C2 = \{q0,q2,$\emptyset$\}\\
+C2 = \{q0,q2,$\emptyset$\} avec b se partitionne en : \{q0,$\emptyset$\}$\mid$\{q2\}\\
+\{q0,$\emptyset$\} avec a se partitionne en : \{q0\}$\mid$\{$\emptyset$\}\\
+\{q3,q4\} ne se partitionne ni avec a ni avec b.\\
+On obtient finalement la partition :\\
+$\emptyset\mid$\{q0\}$\mid$\{q2\}$\mid$\{q3,q4\}\\
+On obtient un automate d’etats finis deterministe a trois etats :\\
+\\
+SCHEMA AUTOMATE\\
+\\
+Algo MINIMISATION Donnee : un automate deterministe A1 = (Q,$\Sigma$,$\delta$,q0,F) Resultat : l’automate deterministe minimum A2 = (Q0,$\Sigma$,$\delta$0,Q0 0,F0). Initialisation : C $\leftarrow$\{Q -F,F\}; b $\leftarrow$ 1; SUPPRIMER de A1 les etats non atteignables; tant que b=1 faire b $\leftarrow$ 0; pour chaque classe C de C faire pour chaque caractere x de $\Sigma$ faire si par $\delta$ on n’aboutit pas dans une meme classe de C alors REMPLACER C dans C par les classes obtenues; b $\leftarrow$ 1; $\delta$0 $\leftarrow$ fonction de passage d’une classe de C a une autre; F0 $\leftarrow$ ensemble des classes de C classes contenant au moins un etat de F ; Retourner(C,$\Sigma$,$\delta$0,q0,F0).\\
+\\
+Theoreme\\
+Pour un langage rationnel L donne, il existe un unique automate d’etats fini deterministe minimum engendrant L.\\
+Consequence fondamentale : Les langages rationnels sont non ambigus.\\
+\\
+\subsection{Langages rationnels : passages d’une representation a une autre}
+Rappel :\\
+Theoreme Un langage L est rationnel (classe 3) ssi il existe une grammaire reguliere G telle que L(G) = L ssi il existe un automate d’etats finis reconnaissant L ssi il existe une expression reguliere engendrant L\\
+La preuve est constructive, sous forme d’algorithmes de passage :\\
+Automate d’etats finis -- Grammaire reguliere\\
+-- Expression reguliere\\
+\subsubsection{Automate d'etats finis vers Grammaire reguliere}
+Automate d’etats finis $\rightarrow$ Grammaire reguliere :\\
+Exemple :\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+On represente l’etat initial q0 par l’axiome S On represente chaque autre etat Qi par un non-terminal Ai Si Qi est un etat final, on ajoute une $\epsilon$ -transition Ai $\rightarrow$ $\epsilon$\\
+\\
+Automate d’etats finis $\rightarrow$ Grammaire reguliere :\\
+Exemple :
+\\
+SCHEMA AUTOMATE\\
+\\
+S $\rightarrow$ bS$\mid$aA1 A1 $\rightarrow$ bS$\mid$aA2 A2 $\rightarrow$ aA2|bA2|$\epsilon$\\
+\\
+Cas particuliers : S $\rightarrow$ bS$\mid$aA A $\rightarrow$ bB B $\rightarrow$ aB$\mid\epsilon$\\
+peut se reecrire : S $\rightarrow$ bS$\mid$abB B $\rightarrow$ aB$\mid\epsilon$\\
+\\
+S $\rightarrow$ bS$\mid$aA A $\rightarrow$ aA$\mid$bB B $\rightarrow$ $\epsilon$\\
+peut se reecrire : S $\rightarrow$ bS|aA A $\rightarrow$ aA|b
+\subsubsection{Grammaire reguliere vers Automate d'etats finis }
+Grammaire reguliere $\rightarrow$ Automate d’etats finis :\\
+On reecrit la grammaire reguliere pour obtenir des regles de production de la forme :\\
+X $\rightarrow$ aY ou X $\rightarrow$ $\epsilon$, avec X,Y $\in$ N et a $\in$ T\\
+\\
+Exemple 1 : S $\rightarrow$ aaA A $\rightarrow$ bA$\mid\epsilon$\\
+se reecrit : S $\rightarrow$ aA1 A1 $\rightarrow$ aA2 A2 $\rightarrow$ bA2$\mid\epsilon$\\
+\\
+Exemple 2 :\\
+S $\rightarrow$ aS$\mid$a\\
+se reecrit : S $\rightarrow$ aS$\mid$aA1 A1 $\rightarrow$ $\epsilon$\\
+\\
+On represente ensuite l’axiome S par l’etat q0 et le non-terminal Ai par l’etat qi\\
+Les etats finaux correspondent aux regles de la forme; Ai $\rightarrow$ $\epsilon$.\\
+\\
+Exemple : S $\rightarrow$ aaA A $\rightarrow$ bA$\mid\epsilon$\\
+se reecrit : S $\rightarrow$ aA1 A1 $\rightarrow$ aA2 A2 $\rightarrow$ bA2$\mid\epsilon$\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\subsubsection{Expression reguliere vers Automate d'etats finis}
+Rappels :\\
+Definition inductive des expressions regulieres :\\
+Definition\\
+Definition inductive des expressions regulieres :\\
+- Base : $\emptyset$, $\epsilon$ et les caracteres de $\Sigma$ sont des expressions regulieres, representant respectivement les langages $\emptyset$,\{$\epsilon$\}, \{x\} si x $\in$ $\Sigma$.\\
+- Regles : si r et s sont des expressions regulieres representant les langages R et S, alors (r + s), r.s, r* et r+ sont des expressions regulieres representant respectivement les langages R $\cup$S, R.S, R* et R+.\\
+\\
+Pour construire un AEF, on applique cette definition inductive : base :\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+regles de construction de l’automate :\\
+r1 + r2
+r1r2
+r*
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+Pour construire r+, on fera rr*
+\\
+Exemple : (a + b)*aba
+\\
+SCHEMA AUTOMATE\\
+\\
+\subsubsection{Automate d'etats finis vers Expression reguliere}
+Algorithme de Mac Naughton et Yamada : 1. Transformation de l’automate en automate generalise 2. Transformation de l’automate generalise en expression reguliere\\
+Bibliographie et figures : Cours d’Alexis Nasr\\
+\\
+Definition Automate generalise : les transitions sont etiquetees par des expressions regulieres (ou par $\emptyset$).\\
+\\
+Transformation d’un automate en automate generalise :\\
+1. ajouter un nouvel etat initial avec une $\epsilon$- transition vers q0\\
+2. ajouter un nouvel etat final vers lequel les anciens etats finaux sont envoyes par une $\epsilon$- transition\\
+3. des transitions etiquetees par $\emptyset$ sont ajoutees entre les etats qui ne sont relies par aucune transition, mais entre lesquels il existe un chemin dans l’automate de depart (ces transitions ne peuvent pas etre franchies)\\
+\\
+Exemple d’initialisation a un automate generalise 
+\\
+SCHEMA AUTOMATE\\
+\\
+A chaque iteration, on supprime un etat. A la fin, il reste une seule transition de l’etat initial a l’etat final, etiquetee par l’expression reguliere recherchee.\\
+\\
+Exemple : on supprime l’etat 1 :\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+Exemple (suite) : on supprime l’etat 2 :\\
+\\
+SCHEMA AUTOMATE\\
+\\
+\\
+On obtient l’expression reguliere b*a(a$\mid$bb*a)*
+\subsubsection{Applications }
+Montrer qu’un langage est rationnel Montrer que deux expressions regulieres sont equivalentes Trouver une grammaire reguliere Ameliorer une grammaire reguliere ...
+\subsubsection{Hierarchie de Chomsky}
+\end{scriptsize}
+\end{document}

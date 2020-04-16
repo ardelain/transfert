@@ -1,0 +1,60 @@
+iris = pd.read_csv("../input/Iris.csv",index_col=0)
+iris_nbrows = iris.shape[0]
+# Séparation des données en 3 ensembles en respectant les proportions indiquées :
+#  iris_Train
+perc1 = int((iris_nbrows*70)/100) #nb row
+iris_Train = iris.sample(perc1)
+iris = iris.drop(iris_Train.index,axis=0)
+display(iris_Train)
+display(iris.shape)
+
+#  iris_Test
+perc2 = int((iris_nbrows*20)/100) #nb row
+iris_Test = iris.sample(perc2)
+iris = iris.drop(iris_Test.index,axis=0)
+display(iris_Test)
+display(iris.shape)
+
+#  iris_Validation
+perc3 = iris_nbrows-perc1-perc2 #nb row
+iris_Validation = iris.sample(perc3)
+iris = iris.drop(iris_Validation.index,axis=0)
+
+#Réindexation
+iris_Train.reset_index(drop=True,inplace=True)
+iris_Test.reset_index(drop=True,inplace=True)
+iris_Validation.reset_index(drop=True,inplace=True)
+# Séparation entre 'X' et 'Y' sur les trois ensembles de travail
+
+iris_TrainY = iris_Train.loc[:,['Species']]#.drop_duplicates()
+iris_TrainX = iris_Train.iloc[:,[0,1,2,3]]
+display(iris_TrainX)
+display(iris_TrainY)
+
+iris_TestY = iris_Train.loc[:,['Species']]#.drop_duplicates()
+iris_TestX = iris_Train.iloc[:,[0,1,2,3]]
+
+iris_ValidationY = iris_Train.loc[:,['Species']]#.drop_duplicates()
+iris_ValidationX = iris_Train.iloc[:,[0,1,2,3]]
+# Retour sur des graphiques, mais cette fois pour réaliser l'apprentissage
+sns.lmplot(x='SepalLengthCm', y='SepalWidthCm', hue='Species', 
+           data=iris_Train, 
+           fit_reg=False)
+Fonction arbre (ne fonctionne pas) :
+
+#Je n'arrive pas à obtenir 0 faute, même en ajoutant d'autres paramètres
+#(Pb de différenciation entre virginica et versicolor)
+# Fonction arbre
+def species(row):
+    if(row.PetalLengthCm <= 2.5 and row.PetalWidthCm <= 1):
+        return 'Iris-setosa'
+    if(row.PetalWidthCm >= 1.7 and row.SepalLengthCm >= 5.5):
+        return 'Iris-virginica'
+    return 'Iris-versicolor'
+    
+def arbre(description):
+    return description.transform(species,1)
+
+res = arbre(iris_TrainX).to_frame('Species')
+bool_res = res.eq(iris_TrainY,axis='columns')
+display(bool_res[bool_res.Species == False])

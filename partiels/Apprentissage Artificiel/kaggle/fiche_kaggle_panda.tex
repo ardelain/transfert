@@ -1,0 +1,161 @@
+\documentclass{article}
+\usepackage{array, tabularx}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\newdimen\demilargeur
+\demilargeur=\textwidth
+\divide\demilargeur by 2
+
+\title{UTILISATION KAGGLE}
+\date{}
+\begin{document}
+\maketitle
+    \part*{Importation et creation de données}
+    
+	\section*{Creation de donnees}
+	Les dataframes : \\
+	\texttt{$donees = pd.DataFrame(\{ 
+	"column" : ["donnee1","donnee2"],  
+	"column2" : ["donnee2-1","donnee2-2"],... \}
+	$}  
+	\\ \\Les series : \\
+    \texttt{$donnees_t = pd.Series(
+    ["donnee1","donnee2","donnee1"],
+    index=["index1","index2","index3"],
+    name="nomSerie")$s}
+	
+    
+    \section*{Importation de donnees}
+    CSV:
+    \\
+     \texttt{$GET : pd.read\_csv("../input/fichier/nom.csv",index\_col=0)$}\\
+    \texttt{$PUT : pd.DataFrame.to\_csv(path\_or\_buf='./nom.csv',self=nom)$}
+    \\ \\SQL:\\
+    
+    \section*{Manipulation des structures de donnees}
+    
+    \begin{tabular}{|p{0.33\linewidth}|p{0.33\linewidth}|p{0.33\linewidth}|}
+	\hline
+	\multicolumn{1}{|c|}{\textbf{Code}} &
+	\multicolumn{1}{c|}{\textbf{Description}} &
+	\multicolumn{1}{c|}{\textbf{Exemple}} \\ \hline
+	.rename(columns= \texttt{$\{ 'nom_column':'nv_nom',...\}$} & changer le nom des colonnes & ... \\ \hline
+	.dropna() & remove all the rows that contain a missing value & ...  \\  \hline
+	.arange(n) & ... & ...  \\ \hline
+	resize((n,m)) & ... & ...  \\ \hline
+	.copy() & ... & copy original   \\  \hline
+	.reset\_index() & ... & copy original   \\  
+	\hline
+	\end{tabular}
+    \section*{Information sur les structures de donnees}
+    \begin{tabular}{|p{0.33\linewidth}|p{0.33\linewidth}|p{0.33\linewidth}|}
+	\hline
+	\multicolumn{1}{|l|}{Code} &
+	\multicolumn{1}{c|}{Description} &
+	\multicolumn{1}{c|}{Exemple} \\ \hline
+	.shape & nombre de ligne et de colonnes & ... \\ \hline
+	.columns & ... & ...  \\ \hline
+	.info() & information generale sur la dataframe. Type de donnée : bool, int64, float64 and object & ...  \\ \hline
+	.describe() & multiple info : 
+nombre de valeurs non manquantes, moyenne, ecart type, etendue, médiane, quartiles et 0,25 & ...  \\ \hline
+	.describe(include= ['object', 'bool']) & statistiques sur les caractéristique non numerique ( indiquer explicitement les types de donnees d'intérêt dans le parametre include ) & ...  \\ \hline  
+	... & ... & ... \\ 
+	\hline
+	\end{tabular}
+	
+    \part*{Selection et manipulation des donnees}
+    
+    \section*{Selection des donnees}
+	\begin{tabular}{|l|c|c|}
+	\hline
+	\multicolumn{1}{|l|}{Code} &
+	\multicolumn{1}{c|}{Description} &
+	\multicolumn{1}{c|}{Exemple} \\ \hline
+	donnees.nom\_column & Data frame de la colonne en question & ... \\ \hline
+	.nom\_column.iloc[n] & n ieme valeur de la colonne nom\_column  & ...  \\ \hline
+	donnees.iloc[i,j] & valeur colonne i et ligne j(exclu)  & ... \\ \hline
+	(n).iloc[i,j] & [:n] (tout jusqu'a n) et iloc & ...  \\ \hline
+	.groupby() & grouper les donnees selon un critere nom & ...  \\ \hline
+	.sample(donnees) & ... & ... \\ \hline
+	\hline
+	\end{tabular}
+	\\ \\\\
+    Condition:\\
+    \texttt{$==,<,>,<=,>=$} comparaison de valeur avec donnee selectionnee
+	\\ \\
+	Reference logique
+	\\
+    \~\ pour le not;	\texttt{$|$} pour le or;	\& pour le and\\
+
+    \section*{Informations sur les donnees}
+
+	Donnee seul : \\
+    \noindent
+    \begin{tabular}{|p{0.33\linewidth}|p{0.33\linewidth}|p{0.33\linewidth}|}
+	\hline
+	\multicolumn{1}{|l|}{Code} &
+	\multicolumn{1}{c|}{Description} &
+	\multicolumn{1}{c|}{Exemple} \\ \hline
+	.dtype & ... & ... \\ \hline
+	.astype('type') & convertion de la donee & ... \\ \hline
+	.isnull() & ... & ... \\ \hline
+	.fillna('nom') & ... & ... \\ \hline		
+	... & ... & ...  \\ 
+	\hline
+	\end{tabular}
+	
+
+	\noindent
+	\\Ensemble de Donnee : \\
+	\noindent
+    \begin{tabular}{|p{0.33\linewidth}|p{0.33\linewidth}|p{0.33\linewidth}|}
+	\hline
+	\multicolumn{1}{|l|}{Code} &
+	\multicolumn{1}{c|}{Description} &
+	\multicolumn{1}{c|}{Exemple} \\ \hline
+	.count() & ... & ... \\ \hline
+	.sum() & ... & ... \\ \hline
+	.max() & donnee max & ... \\ \hline
+	.min() & donnee min & ... \\ \hline
+	.mean() & moyenne & ... \\ \hline
+	.std() & ... & ... \\ \hline
+	.argmax() & index donnee max & ... \\ \hline
+	.argmin() & index donnee min & ... \\ \hline
+	stat.mods & ... & ... \\ \hline
+	... & ... & ... \\ \hline
+	... & ... & ... \\ 
+	\hline
+	\end{tabular}
+	
+	 \section*{Manipulation des donnees}
+  
+	\begin{center}
+    \begin{tabular}{|p{0.33\linewidth}|p{0.33\linewidth}|p{0.33\linewidth}|}
+	\hline
+	\multicolumn{1}{|l|}{Code} &
+	\multicolumn{1}{c|}{Description} &
+	\multicolumn{1}{c|}{Exemple} \\ \hline
+	data.unique() & supprime les doublons & ...  \\
+	\hline
+	\end{tabular}
+    \end{center}
+    
+    \section*{Autre}
+    
+    \begin{center}
+    \begin{tabular}{|p{0.33\linewidth}|p{0.33\linewidth}|p{0.33\linewidth}|}
+	\hline
+	\multicolumn{1}{|l|}{Code} &
+	\multicolumn{1}{c|}{Description} &
+	\multicolumn{1}{c|}{Exemple} \\ \hline
+	data. & ... & ...  \\
+	\hline
+	\end{tabular}
+    \end{center}
+    
+    \part*{Graphiques}
+    
+     \section*{Simples}
+     \section*{Complexes}
+     \section*{Autres}
+\end{document}
